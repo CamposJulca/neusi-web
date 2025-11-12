@@ -1,0 +1,194 @@
+{% extends "web/base.html" %}
+{% load static %}
+
+{% block body_class %}page-contacto zebra-bands{% endblock %}
+
+{% block content %}
+
+<!-- HERO -->
+<header class="hero-slim">
+  <div class="container">
+    <div class="split align-items-center">
+      <div>
+        <p class="kicker mb-2">Contáctenos</p>
+        <h1 class="title mb-0">Hablemos de tu proyecto</h1>
+        <p class="page-subtitle">
+          Nuestro equipo está listo para ayudarte a convertir tus ideas en soluciones reales.
+          Escríbenos y te responderemos muy pronto.
+        </p>
+      </div>
+      <div class="text-center">
+        <img class="img-mask" src="{% static 'assets/contacto.png' %}" alt="Soporte NEUSI">
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- BLOQUE INFO DE CONTACTO -->
+<section class="band">
+  <div class="container">
+    <div class="row g-4 align-items-start">
+      <div class="col-lg-7">
+        <p class="kicker mb-2">Cómo trabajamos contigo</p>
+        <h2 class="section-heading mb-3">Un único canal, varios frentes</h2>
+        <p class="lead-neo">
+          Usamos un solo punto de contacto para coordinar todas las necesidades:
+          propuestas, soporte técnico y seguimiento de proyectos en curso.
+        </p>
+        <ul class="ul-check mt-3">
+          <li>Respuesta inicial en menos de 24&nbsp;horas hábiles.</li>
+          <li>Seguimiento por correo y, si aplica, canal de WhatsApp.</li>
+          <li>Reuniones remotas para revisar alcance, tiempos y riesgos.</li>
+          <li>Resumen ejecutivo después de cada sesión clave.</li>
+        </ul>
+      </div>
+
+      <div class="col-lg-5">
+        <div class="contact-info-grid">
+          <div class="card-band mini">
+            <h6 class="mb-1">Consultas generales</h6>
+            <p class="mb-1 small">Dudas sobre servicios, propuestas o colaboración.</p>
+            <div class="small fw-semibold">
+              <i class="bi bi-envelope me-1"></i> auxiliar.visualizacion@neusisolutions.com
+            </div>
+          </div>
+
+          <div class="card-band mini">
+            <h6 class="mb-1">Soporte a proyectos</h6>
+            <p class="mb-1 small">Incidencias o ajustes en soluciones existentes.</p>
+            <div class="small fw-semibold">
+              <i class="bi bi-clock-history me-1"></i> Lunes a viernes · 8:00 a 17:00
+            </div>
+          </div>
+
+          <div class="card-band mini">
+            <h6 class="mb-1">Canal directo</h6>
+            <p class="mb-1 small">Mensajes rápidos y coordinación operativa.</p>
+            <div class="small fw-semibold">
+              <i class="bi bi-whatsapp me-1"></i> +57&nbsp;302&nbsp;858&nbsp;3772
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STRIP DE REDES -->
+<section class="band soft text-center">
+  <div class="container">
+    <p class="kicker mb-2">Síguenos</p>
+    <div class="d-flex justify-content-center flex-wrap gap-4 social-icons">
+      <div class="social-item text-center">
+        <a href="https://www.instagram.com/neusi_solutions_col/" target="_blank" rel="noopener" class="social-btn text-light fs-4">
+          <i class="bi bi-instagram"></i>
+        </a>
+        <div class="social-label mt-1 small">Instagram</div>
+      </div>
+
+      <div class="social-item text-center">
+        <a href="https://www.tiktok.com/@neusi_solutions_col" target="_blank" rel="noopener" class="social-btn text-light fs-4">
+          <i class="bi bi-tiktok"></i>
+        </a>
+        <div class="social-label mt-1 small">TikTok</div>
+      </div>
+
+      <div class="social-item text-center">
+        <a href="mailto:Auxiliar.Visualización@neusisolutions.com" class="social-btn text-light fs-4">
+          <i class="bi bi-envelope"></i>
+        </a>
+        <div class="social-label mt-1 small">Correo</div>
+      </div>
+
+      <div class="social-item text-center">
+        <a href="https://wa.me/573028583772" target="_blank" rel="noopener" class="social-btn text-light fs-4">
+          <i class="bi bi-whatsapp"></i>
+        </a>
+        <div class="social-label mt-1 small">WhatsApp</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FORMULARIO -->
+<section class="band soft" id="form-contacto">
+  <div class="container">
+    <div class="card-band form-card">
+      <h6 class="mb-3">Escríbenos</h6>
+
+      <form id="contactoForm" action="{% url 'contacto_enviar' %}" method="POST" novalidate>
+        {% csrf_token %}
+        <div class="row g-3">
+          <div class="col-md-6">
+            <label class="form-label">Nombre</label>
+            <input class="form-control form-elevated" type="text" name="name" required>
+          </div>
+          <div class="col-md-6">
+            <label class="form-label">Correo</label>
+            <input class="form-control form-elevated" type="email" name="email" required>
+          </div>
+          <div class="col-12">
+            <label class="form-label">Mensaje</label>
+            <textarea class="form-control form-elevated" name="message" rows="6" required></textarea>
+          </div>
+
+          <input type="hidden" name="source_url" value="{{ request.build_absolute_uri }}">
+
+          <div class="col-12 text-end">
+            <button class="btn btn-cta" type="submit" id="btnEnviar">Enviar</button>
+          </div>
+
+          <div class="col-12">
+            <div id="formMsgOk" class="alert alert-success mt-3 d-none">
+              ✅ ¡Gracias! Te contactaremos muy pronto.
+            </div>
+            <div id="formMsgErr" class="alert alert-danger mt-3 d-none">
+              ❌ No pudimos enviar el mensaje. Intenta de nuevo.
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- JS del formulario (AJAX opcional) -->
+<script>
+  const form = document.getElementById('contactoForm');
+  const ok = document.getElementById('formMsgOk');
+  const err = document.getElementById('formMsgErr');
+  const btn = document.getElementById('btnEnviar');
+
+  if (form) {
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      ok.classList.add('d-none');
+      err.classList.add('d-none');
+      btn.disabled = true;
+      btn.textContent = 'Enviando...';
+
+      const data = new FormData(form);
+      try {
+        const res = await fetch(form.action, {
+          method: 'POST',
+          headers: { 'Accept': 'application/json' },
+          body: data
+        });
+        const json = await res.json();
+        if (json.ok) {
+          form.reset();
+          ok.classList.remove('d-none');
+        } else {
+          err.classList.remove('d-none');
+        }
+      } catch {
+        err.classList.remove('d-none');
+      } finally {
+        btn.disabled = false;
+        btn.textContent = 'Enviar';
+      }
+    });
+  }
+</script>
+
+{% endblock %}

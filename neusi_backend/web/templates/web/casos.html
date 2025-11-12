@@ -1,0 +1,154 @@
+{% extends "web/base.html" %}
+{% load static %}
+
+{% block title %}Casos — NEUSI{% endblock %}
+{% block body_class %}page-casos zebra-bands{% endblock %}
+
+{% block content %}
+
+<!-- HERO -->
+<header class="hero-slim">
+  <div class="container">
+    <p class="kicker mb-2">Casos</p>
+    <h1 class="title mb-0">Historias de impacto real</h1>
+    <p class="page-subtitle">
+      Proyectos que pasaron de la idea a producción con <b>KPIs visibles</b>, <b>trazabilidad por ciclo</b> y resultados
+      medibles para la dirección. Aquí algunos ejemplos representativos.
+    </p>
+  </div>
+</header>
+
+<!-- Intro narrativa -->
+<section class="band">
+  <div class="container narrow text-center reveal">
+    <p class="kicker mb-2">Por qué importa</p>
+    <h2 class="section-heading mb-3">Del MVP al escalado, con evidencia</h2>
+    <p class="lead-neo">
+      Cada caso resume un reto claro, la solución técnica propuesta y el resultado obtenido. Preferimos hablar con datos:
+      tiempo de salida a producción, reducción de reprocesos, cumplimiento de SLAs y ahorro operativo.
+    </p>
+    <p>
+      El enfoque NEUSI combina iteraciones cortas, contrato por API y telemetría. El negocio visualiza avances de forma
+      continua y decide con información de calidad. Menos promesas, más entregas.
+    </p>
+  </div>
+</section>
+
+<!-- Caso 1 -->
+<section class="band soft">
+  <div class="container">
+    <div class="split align-items-center">
+      <div class="reveal">
+        <p class="kicker">Caso</p>
+        <h3 class="mb-2">Plataforma de Contratación</h3>
+        <p>
+          Implementamos flujos CPS por ciclos con documentos en <b>GridFS</b>, firma por etapas y auditoría completa.
+          El rediseño por <em>dominio</em> separó responsabilidades y mejoró la trazabilidad jurídica.
+        </p>
+        <ul class="ul-check mt-2">
+          <li>Notificaciones, evaluaciones y asignaciones por proceso.</li>
+          <li>KPIs ejecutivos y reportes descargables.</li>
+          <li>Reducción de reprocesos y SLAs ≥ 90% sostenidos.</li>
+        </ul>
+        <a class="btn btn-cta mt-3" href="{% url 'contacto' %}">Quiero algo similar</a>
+      </div>
+      <div class="text-center reveal right">
+        <img class="img-mask" src="{% static 'assets/showcase-1.png' %}" alt="Plataforma de Contratación">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Caso 2 -->
+<section class="band">
+  <div class="container">
+    <div class="split align-items-center">
+      <!-- Imagen a la izquierda -->
+      <div class="text-center order-lg-1 reveal left">
+        <img class="img-mask" src="{% static 'assets/finanzapp.png' %}" alt="FinanzApp KPIs">
+      </div>
+
+      <!-- Texto a la derecha -->
+      <div class="order-lg-2 reveal">
+        <p class="kicker">Caso</p>
+        <h3 class="mb-2">FinanzApp multiempresa</h3>
+        <p>
+          Construimos un sistema de KPIs financieros con ETL orquestado y tableros para juntas directivas.
+          El modelo soporta centros de costo, proyecciones y alertas.
+        </p>
+        <ul class="ul-check mt-2">
+          <li>Catálogo y calidad de datos; linaje documentado.</li>
+          <li>Dashboards self-service para gerencia.</li>
+          <li>Control de acceso y auditoría por organización.</li>
+        </ul>
+        <a class="btn btn-ghost mt-3" href="{% url 'servicios' %}">Ver servicios</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Caso 3 -->
+<section class="band soft">
+  <div class="container">
+    <div class="split align-items-center">
+      <div class="reveal">
+        <p class="kicker">Caso</p>
+        <h3 class="mb-2">IoT Urbano con acciones automáticas</h3>
+        <p>
+          Monitoreo de activos con edge computing y reglas de negocio. Telemetría en tiempo real, alertas y reportes
+          de cumplimiento para operación de campo.
+        </p>
+        <ul class="ul-check mt-2">
+          <li>ThingsBoard/MQTT y procesamiento en el borde.</li>
+          <li>Workflows de mantenimiento y evidencias.</li>
+          <li>Seguridad y partición por zonas/roles.</li>
+        </ul>
+        <a class="btn btn-cta mt-3" href="{% url 'contacto' %}">Evaluar viabilidad</a>
+      </div>
+      <div class="text-center reveal right">
+        <img class="img-mask" src="{% static 'assets/urbano.png' %}" alt="IoT Urbano">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Métricas (contadores animados con pages.js) -->
+<section class="band">
+  <div class="container">
+    <p class="kicker mb-2">Métricas</p>
+    <div class="metrics-grid">
+      <div class="metric reveal">
+        <div class="big count" data-count="120" data-prefix="+">0</div>
+        <small>entregas/año</small>
+      </div>
+
+      <div class="metric reveal delay-1">
+        <div class="big count" data-count="99.9" data-suffix="%">0</div>
+        <small>uptime</small>
+      </div>
+
+      <div class="metric reveal delay-2">
+        <div class="big count" data-count="90" data-suffix="%">0</div>
+        <small>SLAs cumplidos</small>
+      </div>
+
+      <div class="metric reveal delay-3">
+        <div class="big count" data-count="-35" data-suffix="%">0</div>
+        <small>reprocesos</small>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="band dark text-center">
+  <div class="container">
+    <h2 class="title mb-2">¿Listos para su caso de éxito?</h2>
+    <p class="lead-neo mb-3">
+      Agendemos una sesión breve para entender tu contexto y priorizar el primer incremento de valor.
+    </p>
+    <a href="{% url 'contacto' %}" class="btn btn-cta btn-lg">Hablemos</a>
+  </div>
+</section>
+
+{% endblock %}

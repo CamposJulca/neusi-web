@@ -1,0 +1,141 @@
+{% extends "web/base.html" %}
+{% load static %}
+
+{% block title %}Nosotros — NEUSI{% endblock %}
+{% block body_class %}page-nosotros zebra-bands{% endblock %}
+
+{% block content %}
+
+<!-- HERO -->
+<header class="hero-slim">
+  <div class="container">
+    <div class="split align-items-center">
+      <div>
+        <p class="kicker mb-2">Nosotros</p>
+        <h1 class="title mb-0">Ingeniería con propósito</h1>
+        <p class="page-subtitle">
+          Somos un equipo multidisciplinario que convierte problemas reales en productos de alto impacto.
+          Operamos con <b>arquitecturas abiertas</b>, <b>seguridad por diseño</b> y <b>métricas</b> desde el día uno.
+        </p>
+      </div>
+      <div class="text-center">
+        <img class="img-mask" src="{% static 'assets/nosotros.png' %}" alt="Equipo NEUSI">
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- Quiénes somos -->
+<section class="band">
+  <div class="container narrow text-center reveal">
+    <p class="kicker mb-2">Quiénes somos</p>
+    <h2 class="section-heading mb-3">Personas, procesos y producto</h2>
+    <p class="lead-neo">
+      Creemos en la ingeniería que resuelve y permanece. Para eso combinamos experiencia técnica,
+      procesos claros y cultura de producto. No buscamos “entregar software”, sino crear capacidades
+      que se sostienen en el tiempo.
+    </p>
+    <p>
+      Trabajamos cerca del usuario final, entendiendo su contexto y restricciones. Documentamos decisiones,
+      automatizamos donde duele y mantenemos la traza completa de cada cambio. Nuestra mejor carta es la evidencia.
+    </p>
+  </div>
+</section>
+
+<!-- Misión / Visión con imagen animada -->
+<section class="band soft">
+  <div class="container">
+    <div class="split align-items-center">
+      <div class="reveal">
+        <p class="kicker">Misión</p>
+        <h3 class="mb-2">Ecosistemas digitales inteligentes</h3>
+        <p>
+          Diseñar y operar soluciones que integren software, datos/IA e IoT para resolver desafíos operativos
+          y estratégicos de organizaciones públicas y privadas.
+        </p>
+        <ul class="ul-check mt-2">
+          <li>Versionado semántico y CI/CD.</li>
+          <li>Observabilidad end-to-end.</li>
+          <li>Integraciones con ERP/BI/ETL.</li>
+        </ul>
+      </div>
+
+      <!-- Imagen animada con estilo -->
+      <div class="text-center reveal right">
+        <img src="{% static 'assets/ecosistema.gif' %}" alt="Ecosistema digital NEUSI"
+             class="img-fluid gif-fusion">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Principios (4 tarjetas) -->
+<section class="band">
+  <div class="container">
+    <p class="kicker mb-2">Principios</p>
+    <div class="row g-4">
+      <div class="col-md-6 col-lg-3">
+        <div class="card-band reveal">
+          <div class="pill mb-2"><i class="bi bi-graph-up"></i><b>Métricas visibles</b></div>
+          <p>KPIs ejecutivos y tableros compartidos para decisiones informadas.</p>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-3">
+        <div class="card-band reveal delay-1">
+          <div class="pill mb-2"><i class="bi bi-diagram-3"></i><b>Interoperabilidad</b></div>
+          <p>Contratos por API y catálogo de datos con linaje documentado.</p>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-3">
+        <div class="card-band reveal delay-2">
+          <div class="pill mb-2"><i class="bi bi-shield-lock"></i><b>Seguridad por diseño</b></div>
+          <p>IAM, hardening, DRP y cumplimiento desde el inicio del proyecto.</p>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-3">
+        <div class="card-band reveal delay-3">
+          <div class="pill mb-2"><i class="bi bi-cloud-check"></i><b>Operación continua</b></div>
+          <p>Telemetría, alertas y playbooks que reducen MTTR y costos.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Cultura (texto a la izquierda, imagen a la derecha) -->
+<section class="band soft">
+  <div class="container">
+    <div class="split align-items-center">
+      <div class="reveal">
+        <p class="kicker">Nuestra cultura</p>
+        <h3 class="mb-2">Transparencia y aprendizaje continuo</h3>
+        <p>
+          Compartimos avances, bloqueos y resultados sin maquillaje. Priorizamos feedback temprano,
+          pairing y code reviews con foco en negocio. Cada incidente deja lecciones que se vuelven
+          automatizaciones o estándares.
+        </p>
+        <ul class="ul-check mt-2">
+          <li>Comunicación abierta con stakeholders.</li>
+          <li>Documentación viva y accesible.</li>
+          <li>Mejora continua y ownership técnico.</li>
+        </ul>
+        <a class="btn btn-cta mt-3" href="{% url 'contacto' %}">Conversemos</a>
+      </div>
+      <div class="text-center reveal right">
+        <img class="img-mask" src="{% static 'assets/showcase-1.png' %}" alt="Cultura NEUSI">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="band dark text-center">
+  <div class="container">
+    <h2 class="title mb-2">¿Conectamos?</h2>
+    <p class="lead-neo mb-3">Cuéntanos tu contexto y diseñamos juntos el primer incremento de valor.</p>
+    <a href="{% url 'servicios' %}" class="btn btn-ghost btn-ghost-gray btn-lg me-2">Ver servicios</a>
+    <a href="{% url 'contacto' %}" class="btn btn-cta btn-lg">Escríbenos</a>
+  </div>
+</section>
+
+{% endblock %}

@@ -1,0 +1,25 @@
+{% load static %}
+<nav id="mainNav" class="navbar navbar-expand-lg navbar-dark navbar-glass fixed-top">
+  <div class="container">
+    <a class="navbar-brand d-flex align-items-center gap-2" href="{% url 'home' %}">
+      <img src="{% static 'assets/logo-neusi.png' %}" alt="NEUSI" class="logo">
+      <span class="fw-bold">NEUSI</span>
+    </a>
+
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+            data-bs-target="#navMenu" aria-label="Menú">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div id="navMenu" class="collapse navbar-collapse">
+      <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+        <li class="nav-item"><a class="nav-link" href="{% url 'home' %}">Home</a></li>
+        <li class="nav-item"><a class="nav-link" href="{% url 'servicios' %}">Servicios</a></li>
+        <li class="nav-item"><a class="nav-link" href="{% url 'propuesta' %}">Propuesta</a></li>
+        <li class="nav-item"><a class="nav-link" href="{% url 'casos' %}">Casos</a></li>
+        <li class="nav-item"><a class="nav-link" href="{% url 'nosotros' %}">Nosotros</a></li>
+        <li class="nav-item"><a class="nav-link" href="{% url 'contacto' %}">Contáctenos</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>

@@ -1,0 +1,321 @@
+{% extends 'web/base.html' %}
+{% load static %}
+
+{% block title %}NEUSI — Ecosistemas Digitales{% endblock %}
+{% block body_class %}home zebra-bands{% endblock %}
+
+{% block content %}
+<!-- HERO con video YouTube de fondo -->
+<header id="home" class="hero hero-center">
+  <!-- Fondo YouTube (sin iframe: la API lo inyecta aquí) -->
+  <div class="hero-bg">
+    <div class="yt-wrapper">
+      <div id="bgPlayer"></div>
+    </div>
+  </div>
+
+  <!-- Overlay para legibilidad -->
+  <div class="hero-overlay"></div>
+
+  <!-- Contenido -->
+  <div class="container hero-content text-center">
+    <h1 class="display-5 fw-bold lh-1">
+      Ecosistemas digitales <span class="underline">inteligentes</span> para decisiones más rápidas.
+    </h1>
+
+    <p class="lead mt-3 subtitle mx-auto" style="max-width: 820px;">
+      Integramos <strong>software</strong>, <strong>datos/IA</strong> e <strong>IoT</strong> con arquitectura abierta,
+      escalable y segura. Entregas ágiles, trazabilidad total y gobierno de datos.
+    </p>
+
+    <div class="d-flex flex-wrap justify-content-center gap-2 my-3">
+      <span class="chip"><i class="bi bi-cpu"></i> Arquitectura modular</span>
+      <span class="chip"><i class="bi bi-shield-lock"></i> Seguridad & auditoría</span>
+      <span class="chip"><i class="bi bi-graph-up"></i> Decisiones con datos</span>
+    </div>
+
+    <div class="d-flex justify-content-center gap-2 mt-2">
+      <a href="#servicios" class="btn btn-outline-light btn-lg px-4">Ver servicios</a>
+    </div>
+
+    <div class="small mt-3 muted">On-prem o nube • CI/CD • Integraciones BI/ERP/SECOP/ETL</div>
+  </div>
+</header>
+
+<!-- NOSOTROS -->
+<section id="nosotros" class="section section-light">
+  <div class="container">
+    <p class="kicker mb-2">Nosotros</p>
+    <h2 class="title mb-3">Ingeniería con propósito</h2>
+
+    <div class="row g-4">
+      <div class="col-lg-6">
+        <div class="card-pro h-100 reveal reveal-right delay-1">
+          <h6 class="fw-bold">Misión</h6>
+          <p>Desarrollar soluciones inteligentes, seguras y escalables que impulsen la transformación digital,
+             integrando software, datos e IoT con enfoque ágil y sostenible.</p>
+
+          <h6 class="fw-bold mt-3">Visión 2027</h6>
+          <p>Ser referente en Latinoamérica en ecosistemas digitales que integran IA e IoT con soluciones
+             interoperables, adaptables y de alto desempeño.</p>
+        </div>
+      </div>
+
+      <div class="col-lg-6">
+        <div class="card-pro h-100 reveal reveal-right delay-2">
+          <h6 class="fw-bold">Valores & prácticas</h6>
+          <ul class="list-check">
+            <li>Innovación aplicada y excelencia técnica</li>
+            <li>Transparencia, colaboración y aprendizaje continuo</li>
+            <li>Sostenibilidad y responsabilidad de datos</li>
+          </ul>
+          <ul class="list-check mt-2">
+            <li>Django / FastAPI / Node • React / Next</li>
+            <li>PostgreSQL • Redis • Docker • CI/CD</li>
+            <li>Observabilidad, seguridad y gobierno de datos</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROPUESTA -->
+<section id="propuesta" class="section section-soft">
+  <div class="container">
+    <p class="kicker mb-2">Propuesta</p>
+    <h2 class="title mb-3">Arquitectura abierta, valor medible</h2>
+    <p class="mb-4">
+      Alineamos tecnología y negocio desde el inicio: descubrimiento con stakeholders, diseño de dominio y
+      arquitectura con seguridad, datos y observabilidad como first-class citizens.
+    </p>
+
+    <div class="row g-4">
+      <div class="col-lg-6">
+        <div class="card-pro h-100 reveal reveal-right delay-1">
+          <h6 class="fw-bold">Cómo trabajamos</h6>
+          <ul class="list-check">
+            <li>Mapeo de procesos críticos y riesgos</li>
+            <li>Roadmap por hitos con supuestos explícitos</li>
+            <li>Entregas quincenales con demos y métricas</li>
+            <li>Comunicación transparente y trazabilidad total</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="col-lg-6">
+        <div class="card-pro h-100 reveal reveal-right delay-2">
+          <h6 class="fw-bold">Diferenciadores</h6>
+          <ul class="list-check">
+            <li>Interoperabilidad por APIs y estándares</li>
+            <li>Gobierno de datos: catálogo, calidad y auditoría</li>
+            <li>Seguridad desde el diseño (IAM, hardening, DRP)</li>
+            <li>Optimización de costos con telemetría</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="col-lg-6">
+        <div class="card-pro h-100 reveal reveal-right delay-3">
+          <h6 class="fw-bold">Garantías de servicio</h6>
+          <ul class="list-check">
+            <li>SLAs por severidad y ventanas de mantenimiento</li>
+            <li>Versionado semántico y gestión de cambios</li>
+            <li>Pruebas automatizadas y monitoreo continuo</li>
+            <li>Plan de reversa y contingencia</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="col-lg-6">
+        <div class="card-pro h-100 reveal reveal-right delay-4">
+          <h6 class="fw-bold">Entregables típicos</h6>
+          <ul class="list-check">
+            <li>Arquitectura de referencia y diagramas de dominio</li>
+            <li>Backlog priorizado y reportes ejecutivos</li>
+            <li>Playbooks de despliegue y observabilidad</li>
+            <li>Guías de seguridad y gobierno de datos</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CASOS -->
+<section id="casos" class="section section-dark">
+  <div class="container">
+    <p class="kicker mb-2">Casos</p>
+    <h2 class="title mb-3">Historias de impacto</h2>
+
+    <div class="row g-4">
+      <div class="col-md-4">
+        <div class="card-pro h-100 reveal reveal-right delay-1">
+          <h6 class="fw-bold">Plataforma de Contratación</h6>
+          <p>Flujos CPS por ciclos, documentos en GridFS y auditoría completa: reducción de reprocesos y SLAs ≥ 90%.</p>
+          <ul class="list-check">
+            <li>Trazabilidad por proceso y notificaciones</li>
+            <li>Evaluaciones, asignaciones y reportes</li>
+            <li>Automatización de documentos SIPSE</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="card-pro h-100 reveal reveal-right delay-2">
+          <h6 class="fw-bold">FinanzApp</h6>
+          <p>KPIs financieros, ETL y tableros ejecutivos con exportables a Excel listos para junta.</p>
+          <ul class="list-check">
+            <li>Proyecciones y alertas</li>
+            <li>Multiempresa y centros de costo</li>
+            <li>Seguridad y auditoría</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="card-pro h-100 reveal reveal-right delay-3">
+          <h6 class="fw-bold">IoT Urbano</h6>
+          <p>Monitoreo de activos con edge computing y acciones automáticas: mantenimiento predictivo y reportes.</p>
+          <ul class="list-check">
+            <li>Telemetría en tiempo real</li>
+            <li>Reglas y alertas</li>
+            <li>Reportes de cumplimiento</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICIOS -->
+<section id="servicios" class="section section-light">
+  <div class="container">
+    <p class="kicker mb-2">Servicios</p>
+    <h2 class="title mb-3">Lo que construimos</h2>
+    <p class="mb-4">
+      Desarrollamos soluciones modulares de alto impacto: desde productos digitales y APIs, hasta analítica e IoT,
+      sustentadas en prácticas de ingeniería, seguridad y operación continua.
+    </p>
+
+    <div class="row g-4">
+      <div class="col-md-6 col-lg-4">
+        <div class="card-pro h-100 reveal reveal-up delay-1">
+          <div class="icon-circle mb-2"><i class="bi bi-braces"></i></div>
+          <h5>Desarrollo de Software</h5>
+          <p>Web/móvil y APIs para procesos críticos. Diseño de dominio, autenticación, auditoría y observabilidad.</p>
+          <ul class="list-check">
+            <li>Arquitectura modular (monolito limpio / microservicios)</li>
+            <li>Pruebas, CI/CD y versionado semántico</li>
+            <li>Integración con ERP/BI/ETL</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="col-md-6 col-lg-4">
+        <div class="card-pro h-100 reveal reveal-up delay-2">
+          <div class="icon-circle mb-2"><i class="bi bi-diagram-3"></i></div>
+          <h5>Datos e Inteligencia Artificial</h5>
+          <p>Del dato a la decisión: pipelines, dashboards y modelos predictivos con valor medible.</p>
+          <ul class="list-check">
+            <li>ETL orquestado, calidad y catálogo</li>
+            <li>KPIs en tiempo real y storytelling</li>
+            <li>NLP, predicción y recomendadores</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="col-md-6 col-lg-4">
+        <div class="card-pro h-100 reveal reveal-up delay-3">
+          <div class="icon-circle mb-2"><i class="bi bi-hdd-network"></i></div>
+          <h5>IoT y Automatización</h5>
+          <p>Sensores, edge y reglas de negocio para operación segura, eficiente y trazable.</p>
+          <ul class="list-check">
+            <li>ThingsBoard/MQTT, edge computing</li>
+            <li>Alertas, acciones automáticas y reportes</li>
+            <li>Mantenimiento y cumplimiento</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="col-md-6 col-lg-4">
+        <div class="card-pro h-100 reveal reveal-up delay-4">
+          <div class="icon-circle mb-2"><i class="bi bi-cloud-check"></i></div>
+          <h5>DevOps & Infra</h5>
+          <p>Despliegues reproducibles, observabilidad, seguridad y costos optimizados.</p>
+          <ul class="list-check">
+            <li>Docker/Compose/K8s, IaC</li>
+            <li>Logs, métricas y trazas unificadas</li>
+            <li>Backups, DRP y hardening</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="col-md-6 col-lg-4">
+        <div class="card-pro h-100 reveal reveal-up delay-5">
+          <div class="icon-circle mb-2"><i class="bi bi-compass"></i></div>
+          <h5>Consultoría & Arquitectura</h5>
+          <p>Diagnóstico técnico y roadmap de modernización con enfoque en interoperabilidad y seguridad.</p>
+          <ul class="list-check">
+            <li>Evaluación de madurez y riesgos</li>
+            <li>Diseño de arquitectura y gobierno de datos</li>
+            <li>Plan de migración y adopción</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="col-md-6 col-lg-4">
+        <div class="card-pro h-100 reveal reveal-up delay-5">
+          <div class="icon-circle mb-2"><i class="bi bi-bezier2"></i></div>
+          <h5>I+D+i</h5>
+          <p>Prototipos y pilotos con métricas claras: IA generativa, RPA y tecnologías emergentes.</p>
+          <ul class="list-check">
+            <li>POCs medibles y transferencia</li>
+            <li>Iteraciones cortas y aprendizaje</li>
+            <li>Spin-offs tecnológicos</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SOCIAL -->
+<section id="social" class="section section-dark" style="background:#0B0B1A; color:#ddd;">
+  <div class="container text-center">
+    <p class="kicker mb-2">Redes</p>
+    <h2 class="title mb-3">Conecta con NEUSI</h2>
+    <p class="mb-4">Síguenos o contáctanos directamente a través de nuestros canales oficiales.</p>
+
+    <div class="d-flex justify-content-center flex-wrap gap-4 social-icons">
+      <div class="social-item text-center">
+        <a href="https://www.instagram.com/neusi_solutions_col/" target="_blank" rel="noopener" class="social-btn text-light fs-4">
+          <i class="bi bi-instagram"></i>
+        </a>
+        <div class="social-label mt-1 small">Instagram</div>
+      </div>
+
+      <div class="social-item text-center">
+        <a href="https://www.tiktok.com/@neusi_solutions_col" target="_blank" rel="noopener" class="social-btn text-light fs-4">
+          <i class="bi bi-tiktok"></i>
+        </a>
+        <div class="social-label mt-1 small">TikTok</div>
+      </div>
+
+      <div class="social-item text-center">
+        <a href="mailto:Auxiliar.Visualización@neusisolutions.com" class="social-btn text-light fs-4">
+          <i class="bi bi-envelope"></i>
+        </a>
+        <div class="social-label mt-1 small">Correo</div>
+      </div>
+
+      <div class="social-item text-center">
+        <a href="https://wa.me/573028583772" target="_blank" rel="noopener" class="social-btn text-light fs-4">
+          <i class="bi bi-whatsapp"></i>
+        </a>
+        <div class="social-label mt-1 small">WhatsApp</div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}

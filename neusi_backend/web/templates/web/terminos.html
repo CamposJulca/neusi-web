@@ -1,0 +1,52 @@
+{% extends "web/base.html" %}
+{% load static %}
+
+{% block title %}Términos de Uso — NEUSI{% endblock %}
+{% block body_class %}page-terminos zebra-bands{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'pages.css' %}">
+<style>
+  .legal-container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 3rem 1.5rem 4rem;
+  }
+  .legal-container h1{
+    color:#fff;
+    margin-bottom:1.5rem;
+  }
+  .legal-container h5{
+    margin-top:1.5rem;
+    color:#e3e1ff;
+  }
+  .legal-container p{
+    color:#ddd;
+    opacity:.94;
+  }
+</style>
+{% endblock %}
+
+{% block content %}
+<section class="section section-dark">
+  <div class="container legal-container">
+    <h1>Términos de Uso</h1>
+    <p>Al acceder o utilizar los servicios de NEUSI, aceptas cumplir con los presentes términos. Si no estás de acuerdo, te recomendamos no continuar con el uso de nuestras plataformas.</p>
+
+    <h5>1. Uso permitido</h5>
+    <p>El contenido y los servicios ofrecidos están destinados exclusivamente para fines institucionales y profesionales. Se prohíbe el uso indebido, distribución no autorizada o alteración de los contenidos.</p>
+
+    <h5>2. Propiedad intelectual</h5>
+    <p>Todo el contenido —incluyendo logotipos, textos, gráficos y código fuente— pertenece a NEUSI o sus aliados y se encuentra protegido por las leyes de derechos de autor vigentes.</p>
+
+    <h5>3. Responsabilidad</h5>
+    <p>NEUSI no se hace responsable por daños derivados del uso indebido del sistema o interrupciones de servicio fuera de su control.</p>
+
+    <h5>4. Modificaciones</h5>
+    <p>Nos reservamos el derecho de actualizar estos términos en cualquier momento. Las modificaciones serán publicadas con fecha de actualización visible.</p>
+
+    <p class="mt-4">Última actualización: noviembre de 2025</p>
+    <a href="{% url 'home' %}" style="color:#9C8FFF; text-decoration:none;">← Volver al inicio</a>
+  </div>
+</section>
+{% endblock %}

@@ -1,0 +1,177 @@
+{% extends "web/base.html" %}
+{% load static %}
+
+{% block title %}Propuesta — NEUSI{% endblock %}
+{% block body_class %}page-propuesta zebra-bands{% endblock %}
+
+{% block content %}
+
+<!-- HERO -->
+<header class="hero-slim">
+  <div class="container">
+    <div class="split align-items-center">
+      <div>
+        <p class="kicker mb-2">Propuesta</p>
+        <h1 class="title mb-0">Arquitectura abierta, valor medible</h1>
+        <p class="page-subtitle">
+          <b>Diseño de dominio</b>, contratos API y <b>observabilidad</b> como pilares para cada entrega.
+          Nuestro enfoque reduce la fricción entre equipos y acelera el retorno sobre la inversión tecnológica.
+        </p>
+        <div class="mt-2">
+          <a class="btn btn-cta me-2" href="{% url 'contacto' %}">Hablemos</a>
+          <a class="btn btn-outline-light" href="{% url 'servicios' %}">Ver servicios</a>
+        </div>
+      </div>
+      <div class="text-center">
+        <img class="img-mask" src="{% static 'assets/propuesta.png' %}" alt="Propuesta NEUSI">
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- Enfoque general -->
+<section class="band">
+  <div class="container narrow text-center reveal">
+    <p class="kicker mb-2">Nuestro enfoque</p>
+    <h2 class="section-heading mb-3">Tecnología al servicio del negocio</h2>
+    <p class="lead-neo">
+      Cada propuesta NEUSI parte de un principio simple: la tecnología debe entregar resultados tangibles.
+      Combinamos metodologías ágiles, diseño centrado en el usuario y arquitectura escalable para
+      construir productos que no solo funcionan, sino que evolucionan con el tiempo.
+    </p>
+    <p>
+      Nuestros equipos trabajan bajo contratos de entrega continua, con tableros de visibilidad compartidos y
+      seguimiento de KPIs clave. Esto nos permite medir el impacto de cada sprint y tomar decisiones basadas en datos.
+    </p>
+  </div>
+</section>
+
+<!-- Diferenciadores + Cómo trabajamos -->
+<section class="band">
+  <div class="container">
+    <div class="row g-4">
+      <div class="col-lg-6">
+        <div class="card-band reveal">
+          <h6 class="mb-2">Cómo trabajamos</h6>
+          <p>
+            Nuestro proceso está diseñado para ser transparente, medible y colaborativo.
+            Nos integramos con tus equipos desde el inicio para construir soluciones que encajen con tus objetivos.
+          </p>
+          <ul class="ul-check mt-2">
+            <li>Mapeo de procesos críticos y riesgos operativos.</li>
+            <li>Roadmap por hitos con supuestos y entregables definidos.</li>
+            <li>Entregas quincenales con demos y métricas de avance.</li>
+            <li>Comunicación abierta y trazabilidad total en cada iteración.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="col-lg-6">
+        <div class="card-band reveal delay-1">
+          <h6 class="mb-2">Diferenciadores</h6>
+          <p>
+            A diferencia de los modelos tradicionales, nuestras soluciones están pensadas para integrarse y mantenerse
+            vivas. Apostamos por la interoperabilidad, el control de versiones y la automatización continua.
+          </p>
+          <ul class="ul-check mt-2">
+            <li>Interoperabilidad por APIs y estándares abiertos.</li>
+            <li>Gobierno de datos: catálogo, calidad, trazabilidad y auditoría.</li>
+            <li>Seguridad desde el diseño (IAM, hardening, DRP).</li>
+            <li>Optimización de costos y monitoreo en tiempo real.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Entregables + Garantías -->
+<section class="band soft">
+  <div class="container">
+    <div class="row g-4">
+      <div class="col-lg-6">
+        <div class="card-band reveal">
+          <h6 class="mb-2">Entregables típicos</h6>
+          <p>
+            Nuestros proyectos se documentan y versionan de forma clara. Cada entrega cuenta con su propia evidencia técnica,
+            garantizando la mantenibilidad y trazabilidad del código y la infraestructura.
+          </p>
+          <ul class="ul-check mt-2">
+            <li>Arquitectura de referencia y diagramas funcionales.</li>
+            <li>Backlog priorizado y reportes ejecutivos por sprint.</li>
+            <li>Playbooks de despliegue y observabilidad.</li>
+            <li>Guías de seguridad y gobierno de datos.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="col-lg-6">
+        <div class="card-band reveal delay-1">
+          <h6 class="mb-2">Garantías de servicio</h6>
+          <p>
+            Sabemos que la confianza se gana con cumplimiento. Por eso nuestros servicios están respaldados por
+            acuerdos SLA claros y planes de contingencia auditables.
+          </p>
+          <ul class="ul-check mt-2">
+            <li>SLAs por severidad y ventanas de mantenimiento.</li>
+            <li>Versionado semántico y gestión de cambios.</li>
+            <li>Pruebas automatizadas y monitoreo continuo.</li>
+            <li>Plan de reversa y continuidad operativa.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Paso a paso -->
+<section class="band">
+  <div class="container">
+    <p class="kicker mb-2">De idea a producción</p>
+    <h2 class="section-heading mb-4">Un proceso claro, repetible y medible</h2>
+    <div class="row g-4">
+      <div class="col-md-3">
+        <div class="step reveal">
+          <div class="num mb-2">1</div>
+          <h6>Descubrimiento</h6>
+          <p>Identificamos objetivos, usuarios y métricas de éxito.</p>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="step reveal delay-1">
+          <div class="num mb-2">2</div>
+          <h6>Arquitectura</h6>
+          <p>Diseñamos contratos, flujos de datos y controles de seguridad.</p>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="step reveal delay-2">
+          <div class="num mb-2">3</div>
+          <h6>Entrega</h6>
+          <p>Desarrollamos y desplegamos con QA automatizado.</p>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="step reveal delay-3">
+          <div class="num mb-2">4</div>
+          <h6>Operación</h6>
+          <p>Monitoreo, soporte y mejora continua del servicio.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Cierre -->
+<section class="band dark text-center">
+  <div class="container">
+    <h2 class="title mb-2">Hablemos de tu caso</h2>
+    <p class="lead-neo mb-3">
+      Agenda una reunión con nuestro equipo técnico y descubramos juntos el camino más eficiente
+      para tu transformación digital. Diseñemos un MVP que tenga impacto desde el primer sprint.
+    </p>
+    <a href="{% url 'contacto' %}" class="btn btn-cta btn-lg">Contactar</a>
+  </div>
+</section>
+
+{% endblock %}

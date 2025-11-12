@@ -1,0 +1,22 @@
+<!-- partials/footer.html -->
+<footer class="footer py-3" style="background:#0B0B1A; color:#ddd;">
+  <div class="container d-flex flex-column flex-md-row align-items-center justify-content-between">
+    <div class="small">
+      © <span id="year"></span> NEUSI · Ingeniería con propósito
+    </div>
+<div class="small d-flex gap-3">
+  <a href="{% url 'terminos' %}" style="color:#9C8FFF; text-decoration:none;">Términos</a>
+  <a href="{% url 'privacidad' %}" style="color:#9C8FFF; text-decoration:none;">Privacidad</a>
+  <a href="{% url 'contacto' %}" style="color:#9C8FFF; text-decoration:none;">Contacto</a>
+</div>
+
+  </div>
+</footer>
+
+<script>
+  // Año dinámico
+  document.addEventListener('DOMContentLoaded', function() {
+    const y = document.getElementById('year');
+    if (y) y.textContent = new Date().getFullYear();
+  });
+</script>

@@ -1,0 +1,74 @@
+{% extends "web/base.html" %}
+{% load static %}
+
+{% block title %}Política de Privacidad — NEUSI{% endblock %}
+{% block body_class %}page-privacidad zebra-bands{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'pages.css' %}">
+<style>
+  .legal-container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 3rem 1.5rem 4rem;
+  }
+  .legal-container h1{
+    color:#fff;
+    margin-bottom:1.5rem;
+  }
+  .legal-container h5{
+    margin-top:1.5rem;
+    color:#e3e1ff;
+  }
+  .legal-container p{
+    color:#ddd;
+    opacity:.94;
+  }
+</style>
+{% endblock %}
+
+{% block content %}
+<section class="section section-dark">
+  <div class="container legal-container">
+
+    <h1>Política de Privacidad</h1>
+
+    <p>
+      En NEUSI respetamos la privacidad de nuestros usuarios y garantizamos la
+      protección de sus datos personales conforme a la legislación vigente en materia
+      de protección de datos.
+    </p>
+
+    <h5>1. Información recopilada</h5>
+    <p>
+      Recolectamos únicamente la información necesaria para la prestación de nuestros
+      servicios: nombre, correo institucional, datos de contacto y registros de
+      actividad dentro de la plataforma.
+    </p>
+
+    <h5>2. Uso de la información</h5>
+    <p>
+      Los datos se utilizan para la gestión operativa, comunicación institucional
+      y mejora continua de los servicios de NEUSI.
+    </p>
+
+    <h5>3. Protección de datos</h5>
+    <p>
+      Implementamos medidas técnicas y organizativas para proteger la información
+      contra accesos no autorizados, pérdida o alteración.
+    </p>
+
+    <h5>4. Derechos del usuario</h5>
+    <p>
+      Los usuarios pueden solicitar la actualización, corrección o eliminación de sus
+      datos personales escribiendo a:
+      <a href="mailto:soporte@neusi.com">auxiliar.visualizacion@neusisolutions.com</a>.
+    </p>
+
+    <p class="mt-4">Última actualización: noviembre de 2025</p>
+
+    <a href="{% url 'home' %}" style="color:#9C8FFF; text-decoration:none;">← Volver al inicio</a>
+
+  </div>
+</section>
+{% endblock %}

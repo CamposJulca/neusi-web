@@ -1,0 +1,154 @@
+{% extends "web/base.html" %}
+{% load static %}
+
+{% block title %}Servicios — NEUSI{% endblock %}
+{% block body_class %}page-servicios zebra-bands{% endblock %}
+
+{% block content %}
+
+<!-- HERO compacto -->
+<header class="hero-slim">
+  <div class="container">
+    <div class="split align-items-center">
+      <div>
+        <p class="kicker mb-2">Servicios</p>
+        <h1 class="title mb-0">Construimos soluciones, de punta a punta</h1>
+        <p class="page-subtitle">
+          En NEUSI integramos estrategia, diseño y tecnología para convertir procesos complejos en
+          soluciones simples y medibles…
+        </p>
+        <div class="mt-2">
+          <a class="btn btn-cta me-2" href="{% url 'contacto' %}">Solicitar propuesta</a>
+          <a class="btn btn-outline-light" href="{% url 'casos' %}">Ver casos</a>
+        </div>
+      </div>
+
+      <div class="text-center">
+        <img class="img-mask"
+             src="{% static 'assets/servicios-hero.png' %}"
+             alt="NEUSI Servicios">
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- 1) Bloque narrativo -->
+<section class="band">
+  <div class="container narrow reveal">
+    <p class="kicker mb-2">Por qué elegirnos</p>
+    <h2 class="section-heading">Velocidad sin perder control</h2>
+    <p class="lead-neo">
+      Entregamos en iteraciones cortas…
+    </p>
+    <ul class="ul-check onecol mt-3">
+      <li>Backlog priorizado por impacto y valor.</li>
+      <li>Contratos API y auditoría end-to-end.</li>
+      <li>Pruebas automatizadas y observabilidad.</li>
+      <li>Métricas visibles en tiempo real.</li>
+    </ul>
+  </div>
+</section>
+
+<!-- 2) Texto ↔ imagen -->
+<section class="band">
+  <div class="container">
+    <div class="split alt align-items-center">
+      <div class="reveal">
+        <p class="kicker mb-2">Servicio de Tecnología</p>
+        <h2 class="section-heading">Software que nace del dominio</h2>
+        <p>Nuestro equipo desarrolla soluciones personalizadas…</p>
+        <div class="pill mt-2 mini">
+          <i class="bi bi-graph-up"></i>
+          <div><b>KPIs ejecutivos</b><br>Dashboard dinámico.</div>
+        </div>
+      </div>
+
+      <div class="frame-media reveal delay-1">
+        <span class="frame-bar"></span>
+        <div class="frame-box">
+          <img src="{% static 'assets/showcase-1.png' %}" alt="Showcase NEUSI">
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 3) Highlights 2x2 -->
+<section class="band">
+  <div class="container">
+    <p class="kicker mb-2">Lo que hacemos</p>
+    <h2 class="section-heading mb-3">Soluciones integradas</h2>
+
+    <div class="row g-4">
+
+      <div class="col-md-6 col-lg-3">
+        <div class="card-band hover-raise reveal">
+          <div class="pill mb-2 mini"><i class="bi bi-braces"></i><b>Software</b></div>
+          <p>Desarrollo modular y mantenible.</p>
+          <ul class="ul-check small">
+            <li>Diseño por dominio.</li>
+            <li>CI/CD y testing.</li>
+            <li>Integración con ERP/BI.</li>
+          </ul>
+          <a class="btn btn-link-arrow mt-2" href="{% url 'propuesta' %}">Arquitectura →</a>
+        </div>
+      </div>
+
+      <div class="col-md-6 col-lg-3">
+        <div class="card-band hover-raise reveal delay-1">
+          <div class="pill mb-2 mini"><i class="bi bi-diagram-3"></i><b>Datos & IA</b></div>
+          <p>Transformamos datos en decisiones.</p>
+          <ul class="ul-check small">
+            <li>Calidad y linaje.</li>
+            <li>Dashboards realtime.</li>
+            <li>Modelos explicables.</li>
+          </ul>
+          <a class="btn btn-link-arrow mt-2" href="{% url 'casos' %}">Casos →</a>
+        </div>
+      </div>
+
+      <div class="col-md-6 col-lg-3">
+        <div class="card-band hover-raise reveal delay-2">
+          <div class="pill mb-2 mini"><i class="bi bi-hdd-network"></i><b>IoT</b></div>
+          <p>Monitoreo y reglas inteligentes.</p>
+          <ul class="ul-check small">
+            <li>MQTT / ThingsBoard.</li>
+            <li>Telemetría en tiempo real.</li>
+            <li>Automatización.</li>
+          </ul>
+          <a class="btn btn-link-arrow mt-2" href="{% url 'contacto' %}">Cotizar →</a>
+        </div>
+      </div>
+
+      <div class="col-md-6 col-lg-3">
+        <div class="card-band hover-raise reveal delay-3">
+          <div class="pill mb-2 mini"><i class="bi bi-cloud-check"></i><b>DevOps</b></div>
+          <p>Infraestructura reproducible.</p>
+          <ul class="ul-check small">
+            <li>IaC.</li>
+            <li>CI/CD.</li>
+            <li>DRP automatizado.</li>
+          </ul>
+          <a class="btn btn-link-arrow mt-2" href="{% url 'propuesta' %}">Ver más →</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- 4) Banda final -->
+<section class="band">
+  <div class="container narrow text-center reveal">
+    <p class="kicker mb-2">Compromiso</p>
+    <h2 class="section-heading mb-2">Menos riesgo, más entrega</h2>
+    <p class="lead-neo">Cada servicio está respaldado por SLAs verificables…</p>
+
+    <div class="mt-3">
+      <a href="{% url 'contacto' %}" class="btn btn-cta btn-lg me-2">Hablemos</a>
+      <a href="{% url 'casos' %}" class="btn btn-ghost btn-lg">Ver resultados</a>
+    </div>
+  </div>
+</section>
+
+{% endblock %}
