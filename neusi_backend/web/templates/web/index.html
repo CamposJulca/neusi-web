@@ -5,10 +5,14 @@
 {% block body_class %}home zebra-bands{% endblock %}
 
 {% block content %}
-<!-- HERO con video YouTube de fondo -->
-<header id="home" class="hero hero-center">
-  <!-- Fondo YouTube (sin iframe: la API lo inyecta aquí) -->
-  <div class="hero-bg">
+<!-- HERO — Red neuronal animada + identidad NEU·WASI -->
+<header id="home" class="hero hero-center" style="background: var(--deep-space);">
+
+  <!-- Canvas neural (nodos + sinapsis animadas) -->
+  <canvas id="neuralCanvas"></canvas>
+
+  <!-- Video YouTube de fondo (capa adicional bajo el canvas) -->
+  <div class="hero-bg" style="z-index:0; opacity:.25;">
     <div class="yt-wrapper">
       <div id="bgPlayer"></div>
     </div>
@@ -19,34 +23,106 @@
 
   <!-- Contenido -->
   <div class="container hero-content text-center">
-    <h1 class="display-5 fw-bold lh-1">
-      Ecosistemas digitales <span class="underline">inteligentes</span> para decisiones más rápidas.
+
+    <!-- Badge de etimología: NEU + WASI -->
+    <div class="mb-4 reveal">
+      <span class="etymology-badge">
+        <span class="etym-part">
+          <span class="etym-label etym-neu">NEU</span>
+          <span class="etym-desc">· neural · inteligencia</span>
+        </span>
+        <span class="etym-dot">✦</span>
+        <span class="etym-part">
+          <span class="etym-label etym-wasi">WASI</span>
+          <span class="etym-desc">· hogar en quechua</span>
+        </span>
+      </span>
+    </div>
+
+    <h1 class="display-4 fw-bold lh-1 reveal delay-1" style="letter-spacing:-.02em;">
+      Tu <span class="text-gradient-neural">hogar de innovación</span><br>
+      impulsado por <span class="text-gradient-gold">inteligencia</span>
     </h1>
 
-    <p class="lead mt-3 subtitle mx-auto" style="max-width: 820px;">
-      Integramos <strong>software</strong>, <strong>datos/IA</strong> e <strong>IoT</strong> con arquitectura abierta,
-      escalable y segura. Entregas ágiles, trazabilidad total y gobierno de datos.
+    <p class="lead mt-3 subtitle mx-auto reveal delay-2" style="max-width: 780px;">
+      Donde las <strong>redes neuronales</strong> y la <strong>calidez del hogar</strong> se unen para resolver
+      los problemas reales de hoy: software, datos/IA e IoT con arquitectura abierta y escalable.
     </p>
 
-    <div class="d-flex flex-wrap justify-content-center gap-2 my-3">
-      <span class="chip"><i class="bi bi-cpu"></i> Arquitectura modular</span>
+    <div class="d-flex flex-wrap justify-content-center gap-2 my-3 reveal delay-3">
+      <span class="chip"><i class="bi bi-diagram-3"></i> Redes neuronales & IA</span>
+      <span class="chip"><i class="bi bi-house-heart"></i> Hogar tecnológico</span>
       <span class="chip"><i class="bi bi-shield-lock"></i> Seguridad & auditoría</span>
-      <span class="chip"><i class="bi bi-graph-up"></i> Decisiones con datos</span>
     </div>
 
-    <div class="d-flex justify-content-center gap-2 mt-2">
-      <a href="#servicios" class="btn btn-outline-light btn-lg px-4">Ver servicios</a>
+    <div class="d-flex justify-content-center gap-3 mt-3 reveal delay-4">
+      <a href="#servicios" class="btn neural-btn btn-lg px-4 text-white">Ver servicios</a>
+      <a href="#nosotros"  class="btn btn-outline-light btn-lg px-4">Conoce NEUSI</a>
     </div>
 
-    <div class="small mt-3 muted">On-prem o nube • CI/CD • Integraciones BI/ERP/SECOP/ETL</div>
+    <div class="small mt-3 muted reveal delay-5">On-prem o nube • CI/CD • Integraciones BI/ERP/SECOP/ETL</div>
   </div>
 </header>
+
+<!-- DIVISOR NEURAL -->
+<hr class="neural-divider m-0">
+
+<!-- MÉTRICAS DE IMPACTO -->
+<section class="section-metrics">
+  <div class="container">
+    <div class="text-center mb-4">
+      <p class="kicker mb-1" style="color:var(--neusi-mid);">Impacto real</p>
+      <h2 class="title text-white">Resultados que hablan</h2>
+    </div>
+    <div class="row g-3 justify-content-center">
+      <div class="col-6 col-md-3">
+        <div class="metric-neural reveal reveal-up delay-1">
+          <i class="bi bi-braces m-icon"></i>
+          <div class="m-num">6+</div>
+          <div class="m-label">Servicios especializados</div>
+        </div>
+      </div>
+      <div class="col-6 col-md-3">
+        <div class="metric-neural reveal reveal-up delay-2">
+          <i class="bi bi-lightning-charge m-icon" style="color:var(--neural-gold);"></i>
+          <div class="m-num">100%</div>
+          <div class="m-label">Proyectos entregados</div>
+        </div>
+      </div>
+      <div class="col-6 col-md-3">
+        <div class="metric-neural reveal reveal-up delay-3">
+          <i class="bi bi-globe2 m-icon" style="color:var(--synapse-cyan);"></i>
+          <div class="m-num">LatAm</div>
+          <div class="m-label">Alcance regional</div>
+        </div>
+      </div>
+      <div class="col-6 col-md-3">
+        <div class="metric-neural reveal reveal-up delay-4">
+          <i class="bi bi-cpu m-icon" style="color:var(--neural-gold);"></i>
+          <div class="m-num">IA+IoT</div>
+          <div class="m-label">Tecnologías integradas</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="neural-divider m-0">
 
 <!-- NOSOTROS -->
 <section id="nosotros" class="section section-light">
   <div class="container">
     <p class="kicker mb-2">Nosotros</p>
     <h2 class="title mb-3">Ingeniería con propósito</h2>
+
+    <!-- Origen del nombre -->
+    <p class="mb-4 reveal" style="max-width:720px; opacity:.85;">
+      <strong style="color:var(--neusi-primary);">NEU</strong> viene de <em>neural</em> —
+      inteligencia, datos y conexiones que aprenden.
+      <strong style="color:var(--neural-gold);">WASI</strong> viene del quechua <em>hogar</em> —
+      un lugar de pertenencia, calidez y trabajo colaborativo.
+      Juntos somos el <strong>hogar tecnológico</strong> donde los problemas reales encuentran soluciones inteligentes.
+    </p>
 
     <div class="row g-4">
       <div class="col-lg-6">
@@ -143,8 +219,13 @@
 </section>
 
 <!-- CASOS -->
-<section id="casos" class="section section-dark">
-  <div class="container">
+<section id="casos" class="section section-dark" style="background:linear-gradient(180deg,#0a0920,#06051A); position:relative; overflow:hidden;">
+  <!-- Glow de fondo: forma radial que evoca una red neuronal -->
+  <div style="position:absolute;inset:0;pointer-events:none;
+    background: radial-gradient(ellipse 700px 400px at 80% 50%, rgba(107,78,255,0.12), transparent),
+                radial-gradient(ellipse 400px 300px at 15% 70%, rgba(255,179,71,0.07), transparent);
+    z-index:0;"></div>
+  <div class="container" style="position:relative;z-index:1;">
     <p class="kicker mb-2">Casos</p>
     <h2 class="title mb-3">Historias de impacto</h2>
 
@@ -214,7 +295,7 @@
 
       <div class="col-md-6 col-lg-4">
         <div class="card-pro h-100 reveal reveal-up delay-2">
-          <div class="icon-circle mb-2"><i class="bi bi-diagram-3"></i></div>
+          <div class="icon-circle-gold mb-2"><i class="bi bi-diagram-3"></i></div>
           <h5>Datos e Inteligencia Artificial</h5>
           <p>Del dato a la decisión: pipelines, dashboards y modelos predictivos con valor medible.</p>
           <ul class="list-check">

@@ -1,0 +1,24 @@
+[Unit]
+Description=NEUSI Web — Gunicorn (producción)
+After=network.target
+
+[Service]
+User=desarrollo
+Group=desarrollo
+WorkingDirectory=/home/desarrollo/Web/neusi_backend
+
+ExecStart=/home/desarrollo/Web/venv/bin/gunicorn \
+    neusi_backend.wsgi:application \
+    --bind 0.0.0.0:8070 \
+    --workers 3 \
+    --timeout 60 \
+    --access-logfile - \
+    --error-logfile  -
+
+Restart=always
+RestartSec=5
+Environment="DJANGO_SETTINGS_MODULE=neusi_backend.settings"
+Environment="PYTHONUNBUFFERED=1"
+
+[Install]
+WantedBy=multi-user.target

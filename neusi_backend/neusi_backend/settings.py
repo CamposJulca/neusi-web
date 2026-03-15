@@ -2,28 +2,26 @@ from pathlib import Path
 import os
 from dotenv import load_dotenv
 
-# Build paths inside the project like this: BASE_DIR / 'subdir'.
+load_dotenv()
+
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
+# ── Seguridad ──────────────────────────────────────────────
+SECRET_KEY = os.getenv('DJANGO_SECRET_KEY', 'django-insecure-ss1q0!$yc89k+^7wsht4c7sijq+rk^@jl*q@ec=f6aaxu-v65n')
+DEBUG      = os.getenv('DJANGO_DEBUG', 'False') == 'True'
 
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-ss1q0!$yc89k+^7wsht4c7sijq+rk^@jl*q@ec=f6aaxu-v65n'
-
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
-
-# Para dev local y pruebas (ngrok opcional). En prod agrega tu dominio.
 ALLOWED_HOSTS = [
     "localhost",
     "127.0.0.1",
     "192.168.0.101",
-    "neusi-web.ngrok.io"
+    "neusi-web.ngrok.io",
 ]
 
+CSRF_TRUSTED_ORIGINS = [
+    "https://neusi-web.ngrok.io",
+]
 
-# Application definition
+# ── Apps ───────────────────────────────────────────────────
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -34,8 +32,10 @@ INSTALLED_APPS = [
     'web',
 ]
 
+# ── Middleware (WhiteNoise justo después de SecurityMiddleware) ──
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',        # ← sirve /static/ en producción
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -49,8 +49,6 @@ ROOT_URLCONF = 'neusi_backend.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        # ⬇️ AQUI EL AJUSTE IMPORTANTE:
-        # Usamos la carpeta raíz "templates", dentro están tus páginas en "templates/web/...".
         'DIRS': [BASE_DIR / 'templates'],
         'APP_DIRS': True,
         'OPTIONS': {
@@ -66,8 +64,7 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'neusi_backend.wsgi.application'
 
-# Database
-# https://docs.djangoproject.com/en/5.2/ref/settings/#databases
+# ── Base de datos ──────────────────────────────────────────
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
@@ -75,52 +72,37 @@ DATABASES = {
     }
 }
 
-# Password validation
-# https://docs.djangoproject.com/en/5.2/ref/settings/#auth-password-validators
-AUTH_PASSWORD_VALIDATORS = [
-    {
-        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
-    },
-]
+# ── Internacionalización ───────────────────────────────────
+LANGUAGE_CODE = 'es-co'
+TIME_ZONE     = 'America/Bogota'
+USE_I18N      = True
+USE_TZ        = True
 
-# Internationalization
-# https://docs.djangoproject.com/en/5.2/topics/i18n/
-LANGUAGE_CODE = 'en-us'
-TIME_ZONE = 'UTC'
-USE_I18N = True
-USE_TZ = True
+# ── Archivos estáticos ─────────────────────────────────────
+STATIC_URL  = '/static/'
+STATIC_ROOT = BASE_DIR / 'staticfiles'          # destino de collectstatic
+STATICFILES_DIRS = [BASE_DIR / 'static']        # fuente en desarrollo
 
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/5.2/howto/static-files/
-STATIC_URL = '/static/'
-# Tus archivos estáticos de desarrollo viven en /static (ya lo tienes)
-STATICFILES_DIRS = [BASE_DIR / 'static']
-# En producción, cuando uses collectstatic:
-# STATIC_ROOT = BASE_DIR / 'staticfiles'
+# WhiteNoise: compresión + cache en producción
+STORAGES = {
+    "staticfiles": {
+        # CompressedStaticFilesStorage: comprime con gzip/brotli
+        # pero NO renombra los archivos → compatible con React build (Vite ya pone sus propios hashes)
+        "BACKEND": "whitenoise.storage.CompressedStaticFilesStorage",
+    },
+    "default": {
+        "BACKEND": "django.core.files.storage.FileSystemStorage",
+    },
+}
 
-# Default primary key field type
-# https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-# ===== Email PROD (ejemplo Office365) =====
-# Carga variables de entorno desde .env
-load_dotenv()
-
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'smtp.office365.com'
-EMAIL_PORT = 587
-EMAIL_USE_TLS = True
-EMAIL_HOST_USER = os.getenv('SMTP_USER')          # e.g. auxiliar.visualizacion@neusisolutions.com
-EMAIL_HOST_PASSWORD = os.getenv('SMTP_PASS')      # tu contraseña (o app password)
-DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
-EMAIL_TIMEOUT = 20
-
+# ── Email (Office365 / SMTP) ───────────────────────────────
+EMAIL_BACKEND       = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST          = 'smtp.office365.com'
+EMAIL_PORT          = 587
+EMAIL_USE_TLS       = True
+EMAIL_HOST_USER     = os.getenv('SMTP_USER')
+EMAIL_HOST_PASSWORD = os.getenv('SMTP_PASS')
+DEFAULT_FROM_EMAIL  = EMAIL_HOST_USER
+EMAIL_TIMEOUT       = 20

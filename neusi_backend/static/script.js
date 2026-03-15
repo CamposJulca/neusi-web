@@ -1,3 +1,143 @@
+/* =============================================================
+   NEUSI NEURAL CANVAS
+   Animación de red neuronal para el hero:
+   nodos flotantes (neuronas) + líneas de conexión (sinapsis)
+   + señales/pulsos viajando en dorado/cyan (neural signals)
+   ============================================================= */
+(function initNeuralCanvas() {
+  const canvas = document.getElementById('neuralCanvas');
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+
+  let W, H, nodes = [], pulses = [], raf, resizeTimer;
+
+  const C = {
+    get count()   { return W < 768 ? 40 : 70; },
+    get maxDist() { return W < 768 ? 105 : 140; },
+    speed:       0.32,
+    pulseProb:   0.00085,
+    maxPulses:   40,
+    nodePrimary: '#6B4EFF',
+    nodeMid:     '#8e86ff',
+    lineColor:   'rgba(107,78,255,',
+    pulseColors: ['#FFB347','#FFB347','#00CFFF','#b89eff'],  /* 50% dorado, 25% cyan, 25% púrpura */
+  };
+
+  class Node {
+    constructor() {
+      this.x = Math.random() * W;
+      this.y = Math.random() * H;
+      const a = Math.random() * Math.PI * 2;
+      const s = (0.15 + Math.random() * 0.5) * C.speed;
+      this.vx = Math.cos(a) * s;
+      this.vy = Math.sin(a) * s;
+      this.r  = 1.2 + Math.random() * 1.4;
+      this.bright = Math.random();
+      this.phase  = Math.random() * Math.PI * 2;
+    }
+    update() {
+      this.x += this.vx; this.y += this.vy;
+      this.phase += 0.018;
+      if (this.x < -8)   this.x = W + 8;
+      if (this.x > W + 8) this.x = -8;
+      if (this.y < -8)   this.y = H + 8;
+      if (this.y > H + 8) this.y = -8;
+    }
+  }
+
+  class Pulse {
+    constructor(a, b) {
+      this.a = a; this.b = b; this.t = 0;
+      this.speed = 0.005 + Math.random() * 0.009;
+      this.color = C.pulseColors[Math.floor(Math.random() * C.pulseColors.length)];
+      this.size  = 2 + Math.random() * 1.2;
+    }
+    update() { this.t += this.speed; return this.t <= 1; }
+    get x() { return this.a.x + (this.b.x - this.a.x) * this.t; }
+    get y() { return this.a.y + (this.b.y - this.a.y) * this.t; }
+  }
+
+  function resize() {
+    W = canvas.width  = canvas.offsetWidth  || window.innerWidth;
+    H = canvas.height = canvas.offsetHeight || window.innerHeight;
+    const target = C.count;
+    while (nodes.length < target) nodes.push(new Node());
+    if (nodes.length > target) nodes.length = target;
+  }
+
+  function draw() {
+    ctx.clearRect(0, 0, W, H);
+    nodes.forEach(n => n.update());
+
+    /* Conexiones */
+    const maxD2 = C.maxDist * C.maxDist;
+    for (let i = 0; i < nodes.length; i++) {
+      for (let j = i + 1; j < nodes.length; j++) {
+        const dx = nodes[i].x - nodes[j].x;
+        const dy = nodes[i].y - nodes[j].y;
+        const d2 = dx*dx + dy*dy;
+        if (d2 < maxD2) {
+          const alpha = (1 - Math.sqrt(d2) / C.maxDist) * 0.32;
+          ctx.beginPath();
+          ctx.moveTo(nodes[i].x, nodes[i].y);
+          ctx.lineTo(nodes[j].x, nodes[j].y);
+          ctx.strokeStyle = C.lineColor + alpha + ')';
+          ctx.lineWidth = 0.65;
+          ctx.stroke();
+          if (Math.random() < C.pulseProb && pulses.length < C.maxPulses)
+            pulses.push(new Pulse(nodes[i], nodes[j]));
+        }
+      }
+    }
+
+    /* Nodos */
+    nodes.forEach(n => {
+      const glow = 0.55 + Math.sin(n.phase) * 0.25;
+      ctx.globalAlpha = glow;
+      ctx.beginPath();
+      ctx.arc(n.x, n.y, n.r, 0, Math.PI * 2);
+      ctx.fillStyle = n.bright > 0.65 ? C.nodeMid : C.nodePrimary;
+      ctx.fill();
+      if (n.bright > 0.82) {
+        ctx.beginPath();
+        ctx.arc(n.x, n.y, n.r * 3, 0, Math.PI * 2);
+        ctx.fillStyle = 'rgba(142,134,255,0.09)';
+        ctx.fill();
+      }
+      ctx.globalAlpha = 1;
+    });
+
+    /* Pulsos (señales sinápticas) */
+    pulses = pulses.filter(p => {
+      if (!p.update()) return false;
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+      ctx.fillStyle = p.color;
+      ctx.shadowBlur  = 10;
+      ctx.shadowColor = p.color;
+      ctx.globalAlpha = 0.92;
+      ctx.fill();
+      ctx.shadowBlur = 0; ctx.globalAlpha = 1;
+      return true;
+    });
+
+    raf = requestAnimationFrame(draw);
+  }
+
+  document.addEventListener('visibilitychange', () => {
+    if (document.hidden) cancelAnimationFrame(raf);
+    else draw();
+  });
+
+  window.addEventListener('resize', () => {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(resize, 160);
+  });
+
+  resize();
+  draw();
+})();
+
 // Año dinámico + ScrollSpy activo y marca de nav
 document.addEventListener("DOMContentLoaded", () => {
   const y = document.getElementById("year");
