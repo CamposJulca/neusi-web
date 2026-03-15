@@ -1,0 +1,15 @@
+[Unit]
+Description=NEUSI Web React/Vite Frontend
+After=network.target
+
+[Service]
+User=desarrollo
+Group=desarrollo
+WorkingDirectory=/home/desarrollo/Web/frontend
+ExecStart=/usr/bin/npm run dev -- --port 8073
+Restart=always
+RestartSec=5
+Environment=NODE_ENV=development
+
+[Install]
+WantedBy=multi-user.target
