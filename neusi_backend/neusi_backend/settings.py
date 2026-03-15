@@ -15,7 +15,13 @@ SECRET_KEY = 'django-insecure-ss1q0!$yc89k+^7wsht4c7sijq+rk^@jl*q@ec=f6aaxu-v65n
 DEBUG = True
 
 # Para dev local y pruebas (ngrok opcional). En prod agrega tu dominio.
-ALLOWED_HOSTS = ["127.0.0.1", "localhost"]
+ALLOWED_HOSTS = [
+    "localhost",
+    "127.0.0.1",
+    "192.168.0.101",
+    "neusi-web.ngrok.io"
+]
+
 
 # Application definition
 INSTALLED_APPS = [
