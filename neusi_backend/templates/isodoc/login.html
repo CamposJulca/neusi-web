@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="es" class="h-full bg-gray-950">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Intranet — NEUSI</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="h-full flex items-center justify-center bg-gray-950">
+  <div class="w-full max-w-sm">
+
+    <!-- Logo -->
+    <div class="text-center mb-8">
+      <div class="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-cyan-400 mb-4">
+        <svg class="w-7 h-7 text-gray-900" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+          <path stroke-linecap="round" stroke-linejoin="round"
+                d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+        </svg>
+      </div>
+      <h1 class="text-2xl font-bold text-gray-100">NEUSI Intranet</h1>
+      <p class="text-sm text-gray-500 mt-1">Sistema de Gestión Documental</p>
+    </div>
+
+    <!-- Card -->
+    <div class="bg-gray-900 border border-gray-800 rounded-2xl p-8 shadow-2xl">
+      {% if form.non_field_errors %}
+      <div class="mb-4 rounded-lg bg-red-900/40 border border-red-800 px-4 py-3 text-sm text-red-300">
+        {% for error in form.non_field_errors %}{{ error }}{% endfor %}
+      </div>
+      {% endif %}
+
+      <form method="post">
+        {% csrf_token %}
+        {% if request.GET.next %}<input type="hidden" name="next" value="{{ request.GET.next }}">{% endif %}
+
+        <div class="space-y-4">
+          <div>
+            <label class="block text-sm font-medium text-gray-400 mb-1.5">Usuario</label>
+            <input type="text" name="username" autofocus required
+                   value="{{ form.username.value|default:'' }}"
+                   class="w-full bg-gray-800 border border-gray-700 text-gray-100 rounded-lg px-4 py-2.5
+                          focus:outline-none focus:ring-2 focus:ring-cyan-400 focus:border-transparent
+                          placeholder-gray-600 transition"
+                   placeholder="nombre de usuario">
+            {% if form.username.errors %}
+            <p class="mt-1 text-xs text-red-400">{{ form.username.errors.0 }}</p>
+            {% endif %}
+          </div>
+
+          <div>
+            <label class="block text-sm font-medium text-gray-400 mb-1.5">Contraseña</label>
+            <input type="password" name="password" required
+                   class="w-full bg-gray-800 border border-gray-700 text-gray-100 rounded-lg px-4 py-2.5
+                          focus:outline-none focus:ring-2 focus:ring-cyan-400 focus:border-transparent
+                          placeholder-gray-600 transition"
+                   placeholder="••••••••">
+            {% if form.password.errors %}
+            <p class="mt-1 text-xs text-red-400">{{ form.password.errors.0 }}</p>
+            {% endif %}
+          </div>
+        </div>
+
+        <button type="submit"
+                class="mt-6 w-full bg-cyan-400 text-gray-900 font-semibold py-2.5 rounded-lg
+                       hover:bg-cyan-300 transition focus:outline-none focus:ring-2 focus:ring-cyan-400 focus:ring-offset-2 focus:ring-offset-gray-900">
+          Iniciar sesión
+        </button>
+      </form>
+    </div>
+
+    <p class="text-center text-xs text-gray-600 mt-6">
+      NEUSI — Acceso exclusivo para usuarios autorizados
+    </p>
+  </div>
+</body>
+</html>

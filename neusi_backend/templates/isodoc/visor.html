@@ -1,0 +1,66 @@
+{% extends "isodoc/base.html" %}
+
+{% block title %}{{ doc.nombre }} v{{ version.version }}{% endblock %}
+{% block page_title %}{{ doc.nombre }} — v{{ version.version }}{% endblock %}
+
+{% block extra_head %}
+<style>
+  #pdf-container { height: calc(100vh - 130px); }
+</style>
+{% endblock %}
+
+{% block header_actions %}
+<a href="{% url 'isodoc:documento_detalle' doc.pk %}" class="btn-secondary">
+  <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+    <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"/>
+  </svg>
+  Volver
+</a>
+<div class="flex items-center gap-2 text-sm text-gray-500">
+  <span class="badge-{{ doc.estado }}">{{ doc.get_estado_display }}</span>
+  <span>·</span>
+  <span>{{ doc.categoria }}</span>
+</div>
+{% endblock %}
+
+{% block content %}
+<div id="pdf-container" class="bg-gray-800 rounded-xl overflow-hidden border border-gray-700 -mx-2">
+  <iframe
+    id="pdf-frame"
+    src="{% url 'isodoc:pdf' version.pk %}"
+    class="w-full h-full"
+    title="{{ doc.nombre }} — v{{ version.version }}"
+    frameborder="0">
+  </iframe>
+</div>
+
+<!-- Info versión -->
+<div class="mt-4 flex items-center gap-6 text-xs text-gray-600">
+  <span>Versión {{ version.version }}</span>
+  <span>·</span>
+  <span>Subido por {{ version.usuario.get_full_name|default:version.usuario.username }}</span>
+  <span>·</span>
+  <span>{{ version.fecha_subida|date:"d M Y, H:i" }}</span>
+  {% if version.comentario %}
+  <span>·</span>
+  <span>{{ version.comentario }}</span>
+  {% endif %}
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+  // Ajustar altura del iframe dinámicamente
+  function ajustarAltura() {
+    const header = document.querySelector('header');
+    const info   = document.querySelector('#pdf-container + div');
+    const vh     = window.innerHeight;
+    const hh     = header ? header.offsetHeight : 65;
+    const ih     = info ? info.offsetHeight + 16 : 40;
+    const container = document.getElementById('pdf-container');
+    if (container) container.style.height = (vh - hh - ih - 80) + 'px';
+  }
+  ajustarAltura();
+  window.addEventListener('resize', ajustarAltura);
+</script>
+{% endblock %}

@@ -30,6 +30,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'web',
+    'isodoc',
 ]
 
 # ── Middleware (WhiteNoise justo después de SecurityMiddleware) ──
@@ -96,6 +97,15 @@ STORAGES = {
 }
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# ── Media (documentos ISODOC) ──────────────────────────────
+MEDIA_ROOT = BASE_DIR / 'media'
+MEDIA_URL  = '/media/'   # sólo accesible vía vista autenticada
+
+# ── Autenticación ──────────────────────────────────────────
+LOGIN_URL          = '/intranet/login/'
+LOGIN_REDIRECT_URL = '/intranet/'
+LOGOUT_REDIRECT_URL = '/'
 
 # ── Email (Office365 / SMTP) ───────────────────────────────
 EMAIL_BACKEND       = 'django.core.mail.backends.smtp.EmailBackend'

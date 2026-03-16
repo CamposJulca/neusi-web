@@ -1,0 +1,151 @@
+{% extends "isodoc/base.html" %}
+
+{% block title %}{{ doc.nombre }}{% endblock %}
+{% block page_title %}{{ doc.nombre }}{% endblock %}
+
+{% block header_actions %}
+{% if puede_editar %}
+<a href="{% url 'isodoc:subir_version' doc.pk %}" class="btn-primary">
+  <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+    <path stroke-linecap="round" stroke-linejoin="round"
+          d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"/>
+  </svg>
+  Nueva versión
+</a>
+<a href="{% url 'isodoc:editar_documento' doc.pk %}" class="btn-secondary">Editar</a>
+{% endif %}
+{% if puede_admin %}
+<form method="post" action="{% url 'isodoc:eliminar_documento' doc.pk %}"
+      onsubmit="return confirm('¿Eliminar este documento y todas sus versiones?')">
+  {% csrf_token %}
+  <button type="submit" class="btn-danger">Eliminar</button>
+</form>
+{% endif %}
+{% endblock %}
+
+{% block content %}
+
+<div class="grid grid-cols-3 gap-6">
+
+  <!-- Info del documento -->
+  <div class="col-span-1 space-y-4">
+    <div class="bg-gray-900 border border-gray-800 rounded-xl p-5">
+      <h2 class="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-4">Información</h2>
+      <dl class="space-y-3">
+        <div>
+          <dt class="text-xs text-gray-600">Categoría</dt>
+          <dd class="text-sm text-gray-200 mt-0.5">{{ doc.categoria }}</dd>
+        </div>
+        <div>
+          <dt class="text-xs text-gray-600">Estado</dt>
+          <dd class="mt-0.5"><span class="badge-{{ doc.estado }}">{{ doc.get_estado_display }}</span></dd>
+        </div>
+        <div>
+          <dt class="text-xs text-gray-600">Creado por</dt>
+          <dd class="text-sm text-gray-200 mt-0.5">
+            {{ doc.usuario_creador.get_full_name|default:doc.usuario_creador.username }}
+          </dd>
+        </div>
+        <div>
+          <dt class="text-xs text-gray-600">Fecha de creación</dt>
+          <dd class="text-sm text-gray-200 mt-0.5">{{ doc.fecha_creacion|date:"d M Y" }}</dd>
+        </div>
+        {% if doc.descripcion %}
+        <div>
+          <dt class="text-xs text-gray-600">Descripción</dt>
+          <dd class="text-sm text-gray-300 mt-0.5">{{ doc.descripcion }}</dd>
+        </div>
+        {% endif %}
+        {% if doc.grupos_acceso.all %}
+        <div>
+          <dt class="text-xs text-gray-600">Acceso restringido a</dt>
+          <dd class="text-sm text-gray-300 mt-0.5">
+            {% for g in doc.grupos_acceso.all %}{{ g.name }}{% if not forloop.last %}, {% endif %}{% endfor %}
+          </dd>
+        </div>
+        {% endif %}
+      </dl>
+    </div>
+
+    {% if version_vigente %}
+    <a href="{% url 'isodoc:visor' version_vigente.pk %}"
+       class="flex items-center gap-3 bg-cyan-400/10 border border-cyan-400/30 rounded-xl p-4
+              hover:bg-cyan-400/15 transition group">
+      <div class="w-10 h-10 rounded-lg bg-cyan-400/20 flex items-center justify-center flex-shrink-0">
+        <svg class="w-5 h-5 text-cyan-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round"
+                d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+          <path stroke-linecap="round" stroke-linejoin="round"
+                d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
+        </svg>
+      </div>
+      <div>
+        <p class="text-sm font-semibold text-cyan-400 group-hover:text-cyan-300 transition">
+          Ver versión vigente
+        </p>
+        <p class="text-xs text-gray-500">v{{ version_vigente.version }}</p>
+      </div>
+    </a>
+    {% endif %}
+  </div>
+
+  <!-- Historial de versiones -->
+  <div class="col-span-2 bg-gray-900 border border-gray-800 rounded-xl overflow-hidden">
+    <div class="px-5 py-4 border-b border-gray-800">
+      <h2 class="text-sm font-semibold text-gray-300">Historial de versiones ({{ versiones|length }})</h2>
+    </div>
+    <div class="divide-y divide-gray-800">
+      {% for ver in versiones %}
+      <div class="px-5 py-4 flex items-start gap-4">
+        <!-- Indicador vigente -->
+        <div class="flex-shrink-0 mt-0.5">
+          {% if ver.es_vigente %}
+          <span class="inline-flex items-center gap-1 text-xs font-semibold text-emerald-400 bg-emerald-900/40 border border-emerald-800 px-2 py-0.5 rounded-full">
+            <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
+            Vigente
+          </span>
+          {% else %}
+          <span class="text-xs text-gray-600 font-mono">v{{ ver.version }}</span>
+          {% endif %}
+        </div>
+
+        <!-- Info versión -->
+        <div class="flex-1 min-w-0">
+          {% if ver.es_vigente %}
+          <p class="text-xs text-gray-500 font-mono">v{{ ver.version }}</p>
+          {% endif %}
+          <p class="text-sm text-gray-400 mt-0.5">
+            {{ ver.usuario.get_full_name|default:ver.usuario.username }}
+            <span class="text-gray-600">· {{ ver.fecha_subida|date:"d M Y, H:i" }}</span>
+          </p>
+          {% if ver.comentario %}
+          <p class="text-sm text-gray-500 mt-1">{{ ver.comentario }}</p>
+          {% endif %}
+        </div>
+
+        <!-- Acciones -->
+        <div class="flex items-center gap-2 flex-shrink-0">
+          <a href="{% url 'isodoc:visor' ver.pk %}" class="btn-secondary py-1.5 text-xs">
+            Ver PDF
+          </a>
+          {% if puede_admin and not ver.es_vigente %}
+          <form method="post" action="{% url 'isodoc:eliminar_version' ver.pk %}"
+                onsubmit="return confirm('¿Eliminar esta versión?')">
+            {% csrf_token %}
+            <button type="submit" class="text-xs text-red-500 hover:text-red-400 transition px-1">
+              Eliminar
+            </button>
+          </form>
+          {% endif %}
+        </div>
+      </div>
+      {% empty %}
+      <div class="px-5 py-10 text-center text-gray-600 text-sm">
+        Aún no hay versiones subidas.
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+
+</div>
+{% endblock %}

@@ -1,0 +1,116 @@
+{% extends "isodoc/base.html" %}
+
+{% block title %}{{ titulo }}{% endblock %}
+{% block page_title %}{{ titulo }}{% endblock %}
+
+{% block content %}
+<div class="max-w-2xl">
+  <form method="post" enctype="multipart/form-data" class="space-y-6">
+    {% csrf_token %}
+
+    <!-- Datos del documento -->
+    <div class="bg-gray-900 border border-gray-800 rounded-xl p-6">
+      <h2 class="text-sm font-semibold text-gray-300 mb-5">Datos del documento</h2>
+      <div class="space-y-4">
+
+        <div>
+          <label class="block text-sm font-medium text-gray-400 mb-1.5">Nombre *</label>
+          {{ form.nombre }}
+          {% if form.nombre.errors %}
+          <p class="mt-1 text-xs text-red-400">{{ form.nombre.errors.0 }}</p>
+          {% endif %}
+        </div>
+
+        <div>
+          <label class="block text-sm font-medium text-gray-400 mb-1.5">Descripción</label>
+          {{ form.descripcion }}
+          {% if form.descripcion.errors %}
+          <p class="mt-1 text-xs text-red-400">{{ form.descripcion.errors.0 }}</p>
+          {% endif %}
+        </div>
+
+        <div class="grid grid-cols-2 gap-4">
+          <div>
+            <label class="block text-sm font-medium text-gray-400 mb-1.5">Categoría *</label>
+            {{ form.categoria }}
+          </div>
+          <div>
+            <label class="block text-sm font-medium text-gray-400 mb-1.5">Estado</label>
+            {{ form.estado }}
+          </div>
+        </div>
+
+        {% if form.grupos_acceso %}
+        <div>
+          <label class="block text-sm font-medium text-gray-400 mb-1.5">
+            Grupos con acceso
+            <span class="text-gray-600 font-normal">(vacío = todos)</span>
+          </label>
+          <div class="space-y-1">
+            {% for choice in form.grupos_acceso %}
+            <label class="flex items-center gap-2 text-sm text-gray-300 cursor-pointer">
+              {{ choice.tag }}
+              {{ choice.choice_label }}
+            </label>
+            {% endfor %}
+          </div>
+        </div>
+        {% endif %}
+
+      </div>
+    </div>
+
+    <!-- Primera versión (solo en creación) -->
+    {% if version_form %}
+    <div class="bg-gray-900 border border-gray-800 rounded-xl p-6">
+      <h2 class="text-sm font-semibold text-gray-300 mb-5">Versión inicial</h2>
+      <div class="space-y-4">
+
+        <div>
+          <label class="block text-sm font-medium text-gray-400 mb-1.5">Número de versión *</label>
+          {{ version_form.version }}
+          {% if version_form.version.errors %}
+          <p class="mt-1 text-xs text-red-400">{{ version_form.version.errors.0 }}</p>
+          {% endif %}
+        </div>
+
+        <div>
+          <label class="block text-sm font-medium text-gray-400 mb-1.5">Archivo PDF *</label>
+          <input type="file" name="archivo" accept=".pdf" required
+                 class="block w-full text-sm text-gray-400 file:mr-4 file:py-2 file:px-4
+                        file:rounded-lg file:border-0 file:text-sm file:font-semibold
+                        file:bg-cyan-400/10 file:text-cyan-400 hover:file:bg-cyan-400/20
+                        file:cursor-pointer cursor-pointer">
+          <p class="mt-1 text-xs text-gray-600">Solo PDF · máximo 50 MB</p>
+          {% if version_form.archivo.errors %}
+          <p class="mt-1 text-xs text-red-400">{{ version_form.archivo.errors.0 }}</p>
+          {% endif %}
+        </div>
+
+        <div>
+          <label class="block text-sm font-medium text-gray-400 mb-1.5">Comentario</label>
+          {{ version_form.comentario }}
+        </div>
+
+      </div>
+    </div>
+    {% endif %}
+
+    <!-- Acciones -->
+    <div class="flex items-center gap-3">
+      <button type="submit" class="btn-primary">
+        <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/>
+        </svg>
+        Guardar
+      </button>
+      {% if doc %}
+      <a href="{% url 'isodoc:documento_detalle' doc.pk %}" class="btn-secondary">Cancelar</a>
+      {% else %}
+      <a href="{% url 'isodoc:lista_documentos' %}" class="btn-secondary">Cancelar</a>
+      {% endif %}
+    </div>
+
+  </form>
+</div>
+{% endblock %}

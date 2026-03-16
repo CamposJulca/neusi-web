@@ -1,0 +1,88 @@
+{% extends "isodoc/base.html" %}
+
+{% block title %}Dashboard{% endblock %}
+{% block page_title %}Dashboard{% endblock %}
+
+{% block header_actions %}
+{% if puede_editar %}
+<a href="{% url 'isodoc:crear_documento' %}" class="btn-primary">
+  <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+    <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"/>
+  </svg>
+  Nuevo documento
+</a>
+{% endif %}
+{% endblock %}
+
+{% block content %}
+
+<!-- Métricas -->
+<div class="grid grid-cols-3 gap-5 mb-8">
+  <div class="bg-gray-900 border border-gray-800 rounded-xl p-5">
+    <p class="text-xs font-medium text-gray-500 uppercase tracking-wider">Documentos totales</p>
+    <p class="text-3xl font-bold text-gray-100 mt-2">{{ total_docs }}</p>
+  </div>
+  <div class="bg-gray-900 border border-gray-800 rounded-xl p-5">
+    <p class="text-xs font-medium text-gray-500 uppercase tracking-wider">Versiones subidas</p>
+    <p class="text-3xl font-bold text-gray-100 mt-2">{{ total_vers }}</p>
+  </div>
+  <div class="bg-gray-900 border border-gray-800 rounded-xl p-5">
+    <p class="text-xs font-medium text-gray-500 uppercase tracking-wider">Categorías activas</p>
+    <p class="text-3xl font-bold text-gray-100 mt-2">{{ categorias|length }}</p>
+  </div>
+</div>
+
+<div class="grid grid-cols-3 gap-6">
+
+  <!-- Categorías -->
+  <div class="col-span-1 bg-gray-900 border border-gray-800 rounded-xl p-5">
+    <h2 class="text-sm font-semibold text-gray-300 mb-4">Categorías</h2>
+    <div class="space-y-2">
+      {% for cat in categorias %}
+      <a href="{% url 'isodoc:lista_documentos' %}?categoria={{ cat.pk }}"
+         class="flex items-center justify-between px-3 py-2.5 rounded-lg hover:bg-gray-800 transition group">
+        <span class="text-sm text-gray-300 group-hover:text-gray-100">{{ cat.nombre }}</span>
+        <span class="text-xs font-semibold text-gray-500 bg-gray-800 px-2 py-0.5 rounded-full group-hover:bg-gray-700">
+          {{ cat.documentos.count }}
+        </span>
+      </a>
+      {% empty %}
+      <p class="text-sm text-gray-600">Sin categorías aún.</p>
+      {% endfor %}
+    </div>
+  </div>
+
+  <!-- Actividad reciente -->
+  <div class="col-span-2 bg-gray-900 border border-gray-800 rounded-xl p-5">
+    <h2 class="text-sm font-semibold text-gray-300 mb-4">Actividad reciente</h2>
+    <div class="space-y-3">
+      {% for ver in recientes %}
+      <div class="flex items-start gap-3 pb-3 border-b border-gray-800 last:border-0 last:pb-0">
+        <div class="w-8 h-8 rounded-full bg-cyan-400/10 border border-cyan-400/20 flex items-center justify-center flex-shrink-0 mt-0.5">
+          <svg class="w-3.5 h-3.5 text-cyan-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round"
+                  d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"/>
+          </svg>
+        </div>
+        <div class="min-w-0 flex-1">
+          <p class="text-sm text-gray-200">
+            <a href="{% url 'isodoc:documento_detalle' ver.documento.pk %}"
+               class="hover:text-cyan-400 transition font-medium">{{ ver.documento.nombre }}</a>
+            <span class="text-gray-500"> — v{{ ver.version }}</span>
+          </p>
+          <p class="text-xs text-gray-600 mt-0.5">
+            {{ ver.usuario.get_full_name|default:ver.usuario.username }}
+            · {{ ver.fecha_subida|date:"d M Y, H:i" }}
+          </p>
+        </div>
+        <a href="{% url 'isodoc:visor' ver.pk %}"
+           class="flex-shrink-0 text-xs text-cyan-400 hover:text-cyan-300 transition">Ver</a>
+      </div>
+      {% empty %}
+      <p class="text-sm text-gray-600">Aún no hay actividad registrada.</p>
+      {% endfor %}
+    </div>
+  </div>
+
+</div>
+{% endblock %}
