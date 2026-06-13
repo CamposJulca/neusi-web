@@ -56,16 +56,21 @@ export default function ServicesSection() {
   const { ref, visible } = useReveal(0.1);
 
   return (
-    <section id="servicios" className="py-24 bg-white">
-      <div className="max-w-6xl mx-auto px-4" ref={ref}>
+    <section id="servicios" className="py-24 relative overflow-hidden"
+      style={{ background: "linear-gradient(180deg, #0d0c26 0%, #07061A 100%)" }}
+    >
+      <div className="absolute inset-0 pointer-events-none"
+        style={{ background: "radial-gradient(ellipse 70% 50% at 50% 0%, rgba(107,78,255,0.06), transparent)" }}
+      />
+      <div className="max-w-6xl mx-auto px-4 relative" ref={ref}>
         <motion.div
           initial={{ opacity: 0, y: 20 }} animate={visible ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }}
           className="mb-12"
         >
-          <p className="text-[#6B4EFF] text-xs font-bold uppercase tracking-[0.15em] mb-2">Servicios</p>
-          <h2 className="text-3xl sm:text-4xl font-black text-[#151431] mb-3">Lo que construimos</h2>
-          <p className="text-[#151431]/60 max-w-xl">
+          <p className="text-[#8e86ff] text-xs font-bold uppercase tracking-[0.15em] mb-2">Servicios</p>
+          <h2 className="text-3xl sm:text-4xl font-black text-white mb-3">Lo que construimos</h2>
+          <p className="text-white/60 max-w-xl">
             Soluciones modulares de alto impacto: desde productos digitales y APIs hasta analítica e IoT.
           </p>
         </motion.div>
@@ -77,8 +82,7 @@ export default function ServicesSection() {
               initial={{ opacity: 0, y: 28 }}
               animate={visible ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.5, delay: i * 0.08 }}
-              className="group p-6 rounded-2xl bg-white border border-[#e7e4ff]
-                shadow-[0_4px_18px_rgba(107,78,255,0.06)]
+              className="group p-6 rounded-2xl bg-white/[0.04] border border-white/[0.08]
                 hover:-translate-y-1.5 hover:border-[#6B4EFF]/40
                 hover:shadow-[0_12px_32px_rgba(107,78,255,0.18)]
                 transition-all duration-300 cursor-default"
@@ -92,16 +96,16 @@ export default function ServicesSection() {
               </div>
 
               {/* Content */}
-              <h3 className="text-base font-bold text-[#151431] mb-2">{s.title}</h3>
-              <p className="text-sm text-[#151431]/60 leading-relaxed mb-3">{s.desc}</p>
+              <h3 className="text-base font-bold text-white mb-2">{s.title}</h3>
+              <p className="text-sm text-white/60 leading-relaxed mb-3">{s.desc}</p>
 
               {/* Resultado de negocio */}
               <div
                 className="flex items-start gap-2 mb-4 px-3 py-2 rounded-lg"
-                style={{ background: `${s.color}0d` }}
+                style={{ background: `${s.color}1f` }}
               >
                 <span className="text-xs mt-0.5" style={{ color: s.color }}>↗</span>
-                <p className="text-xs font-semibold text-[#151431]/75 leading-snug">{s.outcome}</p>
+                <p className="text-xs font-semibold text-white/80 leading-snug">{s.outcome}</p>
               </div>
 
               {/* Tags */}

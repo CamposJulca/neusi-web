@@ -42,16 +42,19 @@ export default function CasesSection() {
 
   return (
     <section id="casos" className="py-24 relative overflow-hidden"
-      style={{ background: "linear-gradient(180deg, #f5f3ff 0%, #fff 100%)" }}
+      style={{ background: "linear-gradient(180deg, #0d0c26 0%, #05041A 100%)" }}
     >
-      <div className="max-w-6xl mx-auto px-4" ref={ref}>
+      <div className="absolute inset-0 pointer-events-none"
+        style={{ background: "radial-gradient(ellipse 60% 50% at 20% 0%, rgba(0,207,255,0.05), transparent)" }}
+      />
+      <div className="max-w-6xl mx-auto px-4 relative" ref={ref}>
         <motion.div
           initial={{ opacity: 0, y: 20 }} animate={visible ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }}
           className="mb-12"
         >
-          <p className="text-[#6B4EFF] text-xs font-bold uppercase tracking-[0.15em] mb-2">Casos de uso</p>
-          <h2 className="text-3xl sm:text-4xl font-black text-[#151431]">Historias de impacto</h2>
+          <p className="text-[#8e86ff] text-xs font-bold uppercase tracking-[0.15em] mb-2">Casos de uso</p>
+          <h2 className="text-3xl sm:text-4xl font-black text-white">Historias de impacto</h2>
         </motion.div>
 
         <div className="grid md:grid-cols-3 gap-6">
@@ -61,8 +64,7 @@ export default function CasesSection() {
               initial={{ opacity: 0, y: 30 }}
               animate={visible ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.55, delay: i * 0.12 }}
-              className="group relative p-6 rounded-2xl bg-white border border-[#e7e4ff]
-                shadow-[0_4px_18px_rgba(107,78,255,0.06)]
+              className="group relative p-6 rounded-2xl bg-white/[0.04] border border-white/[0.08]
                 hover:-translate-y-2
                 hover:shadow-[0_16px_40px_rgba(107,78,255,0.16)]
                 transition-all duration-300 overflow-hidden"
@@ -76,7 +78,7 @@ export default function CasesSection() {
                 {c.tag}
               </span>
 
-              <h3 className="text-lg font-black text-[#151431] mb-4">{c.title}</h3>
+              <h3 className="text-lg font-black text-white mb-4">{c.title}</h3>
 
               {/* Estructura Problema → Solución → Resultado */}
               <div className="space-y-3 mb-5">
@@ -90,14 +92,14 @@ export default function CasesSection() {
                     </span>
                     <div>
                       <p className="text-[11px] font-bold uppercase tracking-wide" style={{ color: c.color }}>{s.label}</p>
-                      <p className="text-sm text-[#151431]/70 leading-snug">{c[s.key]}</p>
+                      <p className="text-sm text-white/65 leading-snug">{c[s.key]}</p>
                     </div>
                   </div>
                 ))}
               </div>
 
               {/* Metric badge */}
-              <div className="flex items-center gap-2 pt-4 border-t border-[#e7e4ff]">
+              <div className="flex items-center gap-2 pt-4 border-t border-white/10">
                 <span className="text-xs font-bold px-3 py-1 rounded-full"
                   style={{ background: `${c.color}12`, color: c.color }}>
                   {c.metric}

@@ -4,6 +4,7 @@ import MetricsSection  from "./sections/MetricsSection";
 import ServicesSection from "./sections/ServicesSection";
 import ProposalSection from "./sections/ProposalSection";
 import CasesSection    from "./sections/CasesSection";
+import CtaBanner       from "./sections/CtaBanner";
 import TeamSection     from "./sections/TeamSection";
 import AboutSection    from "./sections/AboutSection";
 import ContactSection  from "./sections/ContactSection";
@@ -19,6 +20,7 @@ export default function App() {
         <ServicesSection />
         <ProposalSection />
         <CasesSection />
+        <CtaBanner />
         <TeamSection />
         <AboutSection />
         <ContactSection />

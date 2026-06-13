@@ -45,25 +45,24 @@ export default function AboutSection() {
               className="space-y-4 text-white/65 leading-relaxed text-sm"
             >
               <p>
-                <strong className="text-[#8e86ff]">NEU</strong> viene de <em>neural</em> — inteligencia,
-                datos y conexiones que aprenden.{" "}
-                <strong className="text-[#FFB347]">WASI</strong> es el quechua para <em>hogar</em> —
-                un lugar de pertenencia y calidez.
+                <strong className="text-[#8e86ff]">NEU</strong> de <em>neural</em> +{" "}
+                <strong className="text-[#FFB347]">WASI</strong>, <em>hogar</em> en quechua:
+                el <strong className="text-white">hogar tecnológico</strong> donde los problemas reales
+                encuentran soluciones inteligentes.
               </p>
               <p>
-                Juntos somos el <strong className="text-white">hogar tecnológico</strong> donde los problemas
-                reales encuentran soluciones inteligentes. Desarrollamos ecosistemas digitales que integran
-                software, datos/IA e IoT con arquitectura abierta y sostenible.
+                Integramos <strong className="text-white">software, datos/IA e IoT</strong> con arquitectura
+                abierta y valor medible.
               </p>
 
               <div className="mt-6 p-4 rounded-xl bg-white/4 border border-white/8">
                 <p className="font-bold text-white text-sm mb-1">Misión</p>
-                <p>Desarrollar soluciones inteligentes, seguras y escalables que impulsen la transformación digital con enfoque ágil y sostenible.</p>
+                <p>Soluciones seguras y escalables que impulsen la transformación digital con enfoque ágil.</p>
               </div>
 
               <div className="p-4 rounded-xl bg-white/4 border border-white/8">
                 <p className="font-bold text-white text-sm mb-1">Visión 2027</p>
-                <p>Ser referente en Latinoamérica en ecosistemas digitales que integran IA e IoT con soluciones interoperables y de alto desempeño.</p>
+                <p>Ser referente en Latinoamérica en ecosistemas digitales que integran IA e IoT.</p>
               </div>
             </motion.div>
           </div>

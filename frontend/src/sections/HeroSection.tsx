@@ -38,6 +38,12 @@ export default function HeroSection() {
         style={{ background: "radial-gradient(ellipse 60% 50% at 50% 50%, rgba(107,78,255,0.12), transparent 70%)" }}
       />
 
+      {/* ── Scrim de legibilidad: oscurece el centro para que el texto no compita con la red 3D ── */}
+      <div
+        className="absolute inset-0 z-[2] pointer-events-none"
+        style={{ background: "radial-gradient(ellipse 55% 48% at 50% 46%, rgba(5,4,26,0.78) 0%, rgba(5,4,26,0.45) 45%, transparent 75%)" }}
+      />
+
       {/* ── Contenido ── */}
       <div className="relative z-10 text-center px-4 max-w-4xl mx-auto">
 
@@ -77,11 +83,10 @@ export default function HeroSection() {
         {/* Subtítulo */}
         <motion.p
           {...fadeUp(0.36)}
-          className="mt-6 text-lg sm:text-xl text-white/70 max-w-2xl mx-auto leading-relaxed"
+          className="mt-6 text-lg sm:text-xl text-white/80 max-w-2xl mx-auto leading-relaxed"
         >
-          Donde las <strong className="text-white/90">redes neuronales</strong> y la{" "}
-          <strong className="text-white/90">calidez del hogar</strong> se unen para resolver
-          los problemas reales de hoy: software, datos/IA e IoT.
+          Ayudamos a empresas a <strong className="text-white">tomar mejores decisiones con sus propios datos</strong>.
+          Construimos software, IA e IoT a la medida, con resultados medibles.
         </motion.p>
 
         {/* Chips */}

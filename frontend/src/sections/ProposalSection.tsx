@@ -28,18 +28,21 @@ export default function ProposalSection() {
   const { ref, visible } = useReveal(0.1);
 
   return (
-    <section id="propuesta" className="py-24"
-      style={{ background: "linear-gradient(180deg, #fff 0%, #f5f3ff 100%)" }}
+    <section id="propuesta" className="py-24 relative overflow-hidden"
+      style={{ background: "linear-gradient(180deg, #07061A 0%, #0d0c26 100%)" }}
     >
-      <div className="max-w-6xl mx-auto px-4" ref={ref}>
+      <div className="absolute inset-0 pointer-events-none"
+        style={{ background: "radial-gradient(ellipse 60% 50% at 80% 0%, rgba(255,179,71,0.05), transparent)" }}
+      />
+      <div className="max-w-6xl mx-auto px-4 relative" ref={ref}>
         <motion.div
           initial={{ opacity: 0, y: 20 }} animate={visible ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }}
           className="mb-12"
         >
-          <p className="text-[#6B4EFF] text-xs font-bold uppercase tracking-[0.15em] mb-2">Propuesta</p>
-          <h2 className="text-3xl sm:text-4xl font-black text-[#151431] mb-3">Arquitectura abierta, valor medible</h2>
-          <p className="text-[#151431]/60 max-w-xl">
+          <p className="text-[#8e86ff] text-xs font-bold uppercase tracking-[0.15em] mb-2">Propuesta</p>
+          <h2 className="text-3xl sm:text-4xl font-black text-white mb-3">Arquitectura abierta, valor medible</h2>
+          <p className="text-white/60 max-w-xl">
             Alineamos tecnología y negocio desde el inicio con seguridad, datos y observabilidad como ciudadanos de primera clase.
           </p>
         </motion.div>
@@ -51,20 +54,19 @@ export default function ProposalSection() {
               initial={{ opacity: 0, y: 24 }}
               animate={visible ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.5, delay: i * 0.1 }}
-              className="p-6 rounded-2xl bg-white border border-[#e7e4ff]
-                shadow-[0_4px_18px_rgba(107,78,255,0.05)]
+              className="p-6 rounded-2xl bg-white/[0.04] border border-white/[0.08]
                 hover:-translate-y-1 hover:border-[#6B4EFF]/30
                 hover:shadow-[0_12px_30px_rgba(107,78,255,0.12)]
                 transition-all duration-300"
             >
               <div className="flex items-center gap-3 mb-4">
                 <span className="text-2xl">{c.icon}</span>
-                <h3 className="font-bold text-[#151431]">{c.title}</h3>
+                <h3 className="font-bold text-white">{c.title}</h3>
               </div>
               <ul className="space-y-2">
                 {c.items.map((item) => (
-                  <li key={item} className="flex items-start gap-2 text-sm text-[#151431]/65">
-                    <span className="text-[#6B4EFF] mt-0.5 text-xs font-bold">✓</span>
+                  <li key={item} className="flex items-start gap-2 text-sm text-white/65">
+                    <span className="text-[#8e86ff] mt-0.5 text-xs font-bold">✓</span>
                     {item}
                   </li>
                 ))}
