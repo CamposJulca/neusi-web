@@ -1,0 +1,48 @@
+# ──────────────────────────────────────────────────────────────────────────
+# NEUSI Web — Orquestación
+#   web:         monolito Django + Gunicorn (build del Dockerfile).
+#   cloudflared: sidecar que levanta el túnel de Cloudflare hacia `web:8070`.
+#
+# Despliegue de un solo comando:  docker compose up -d --build
+# IMPORTANTE: sembrar la BD en el volumen `neusi_db` ANTES del primer up.
+#             Ver README.docker.md.
+# ──────────────────────────────────────────────────────────────────────────
+
+services:
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      # Para fallback de Node a Debian:  --build-arg NODE_IMAGE=node:22-slim
+      args:
+        NODE_IMAGE: ${NODE_IMAGE:-node:22-alpine}
+    image: neusi-web:latest
+    env_file: .env
+    environment:
+      # La BD vive en el volumen persistente (no dentro de la imagen)
+      DJANGO_DB_PATH: /data/db.sqlite3
+    # Solo visible en la red interna del compose; NO se publica al host.
+    # cloudflared accede vía el nombre de servicio `web`.
+    expose:
+      - "8070"
+    volumes:
+      - neusi_db:/data                       # BD SQLite persistente
+      - neusi_media:/app/neusi_backend/media # documentos isodoc persistentes
+    restart: unless-stopped
+
+  cloudflared:
+    image: cloudflare/cloudflared:latest
+    # Túnel gestionado por token (las reglas de ingress se definen en el
+    # dashboard de Cloudflare, apuntando a  http://web:8070 ).
+    command: tunnel --no-autoupdate run
+    environment:
+      TUNNEL_TOKEN: ${TUNNEL_TOKEN}
+    depends_on:
+      - web
+    restart: unless-stopped
+
+volumes:
+  neusi_db:
+    name: neusi_db          # nombre fijo (sin prefijo de proyecto) para el seeding
+  neusi_media:
+    name: neusi_media

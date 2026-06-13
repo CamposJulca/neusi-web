@@ -1,0 +1,31 @@
+# Git / meta
+.git
+.gitignore
+.claude
+
+# Python
+venv/
+**/__pycache__/
+*.py[cod]
+*.log
+
+# Entorno virtual y artefactos locales que NO deben entrar al build
+neusi_backend/staticfiles/
+neusi_backend/static/react/
+neusi_backend/db.sqlite3
+*.sqlite3.bak
+db.sqlite3.bak
+neusi_backend/media/
+
+# Node (el build se hace dentro del stage frontend con npm ci)
+frontend/node_modules/
+frontend/dist/
+
+# Secretos y backups
+.env
+
+# Documentación / despliegue antiguo
+observaciones/
+deploy.sh
+neusiweb.service
+README.md

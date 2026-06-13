@@ -8,6 +8,8 @@ __pycache__/
 
 # Base de datos local
 db.sqlite3
+*.sqlite3.bak
+db.sqlite3.bak
 
 # Archivos temporales de editor
 .vscode/

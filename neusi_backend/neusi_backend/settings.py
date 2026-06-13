@@ -6,20 +6,31 @@ load_dotenv()
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-# ── Seguridad ──────────────────────────────────────────────
+
+def _csv_env(name, default):
+    """Lee una variable de entorno separada por comas y la devuelve como lista."""
+    return [item.strip() for item in os.getenv(name, default).split(',') if item.strip()]
+
+
+# ── Seguridad (12-Factor: configurable por entorno) ────────
 SECRET_KEY = os.getenv('DJANGO_SECRET_KEY', 'django-insecure-ss1q0!$yc89k+^7wsht4c7sijq+rk^@jl*q@ec=f6aaxu-v65n')
 DEBUG      = os.getenv('DJANGO_DEBUG', 'False') == 'True'
 
-ALLOWED_HOSTS = [
-    "localhost",
-    "127.0.0.1",
-    "192.168.0.101",
-    "neusi-web.ngrok.io",
-]
+# Hosts y orígenes CSRF se leen de entorno (coma-separados). Los defaults cubren
+# desarrollo local, el túnel ngrok actual y los dominios de producción tras Cloudflare.
+ALLOWED_HOSTS = _csv_env(
+    'DJANGO_ALLOWED_HOSTS',
+    'localhost,127.0.0.1,192.168.0.101,neusi-web.ngrok.io,neusisolutions.com,www.neusisolutions.com',
+)
 
-CSRF_TRUSTED_ORIGINS = [
-    "https://neusi-web.ngrok.io",
-]
+CSRF_TRUSTED_ORIGINS = _csv_env(
+    'DJANGO_CSRF_TRUSTED_ORIGINS',
+    'https://neusi-web.ngrok.io,https://neusisolutions.com,https://www.neusisolutions.com',
+)
+
+# HTTPS es terminado por Cloudflare; Django debe reconocer el esquema reenviado
+# para que CSRF, cookies seguras y redirecciones funcionen correctamente.
+SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
 
 # ── Apps ───────────────────────────────────────────────────
 INSTALLED_APPS = [
@@ -66,10 +77,18 @@ TEMPLATES = [
 WSGI_APPLICATION = 'neusi_backend.wsgi.application'
 
 # ── Base de datos ──────────────────────────────────────────
+# SQLite. La ruta se lee de entorno (DJANGO_DB_PATH) para poder apuntarla a un
+# volumen persistente en Docker (/data/db.sqlite3); por defecto usa BASE_DIR
+# para mantener compatibilidad con el despliegue systemd actual.
+#
+# Migración futura a PostgreSQL (NO implementado): reemplazar este bloque por
+# una configuración basada en POSTGRES_* / DATABASE_URL y añadir psycopg al
+# requirements. Ver README.docker.md → "migración futura a PostgreSQL".
+DJANGO_DB_PATH = os.getenv('DJANGO_DB_PATH', str(BASE_DIR / 'db.sqlite3'))
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'NAME': DJANGO_DB_PATH,
     }
 }
 
