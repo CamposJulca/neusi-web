@@ -20,7 +20,6 @@ const TEAM = [
     color:   "#6B4EFF",
     glow:    "rgba(107,78,255,0.55)",
     initial: "D",
-    nodeId:  "NODE-001",
     tags:    ["Arquitectura", "Estrategia", "DevOps"],
     photo:   `${BASE}team/daniel.jpg`,
   },
@@ -32,7 +31,6 @@ const TEAM = [
     color:   "#FFB347",
     glow:    "rgba(255,179,71,0.55)",
     initial: "D",
-    nodeId:  "NODE-002",
     tags:    ["Gestión", "Finanzas", "Procesos"],
     photo:   `${BASE}team/diana.jpg`,
   },
@@ -44,7 +42,6 @@ const TEAM = [
     color:   "#00CFFF",
     glow:    "rgba(0,207,255,0.55)",
     initial: "J",
-    nodeId:  "NODE-003",
     tags:    ["React", "Django", "APIs"],
     photo:   `${BASE}team/juan.jpg`,
   },
@@ -56,7 +53,6 @@ const TEAM = [
     color:   "#19c37d",
     glow:    "rgba(25,195,125,0.55)",
     initial: "A",
-    nodeId:  "NODE-004",
     tags:    ["ETL", "ML", "Visualización"],
     photo:   `${BASE}team/andres.jpg`,
   },
@@ -194,26 +190,8 @@ function MemberCard({ member, index, visible }: { member: typeof TEAM[0]; index:
           animate={hovered ? { opacity: 1 } : { opacity: 0.4 }}
         />
 
-        {/* Node ID badge */}
-        <div className="flex justify-between items-start mb-5">
-          <span className="text-[10px] font-mono tracking-widest px-2 py-0.5 rounded"
-            style={{ background: `${member.color}15`, color: member.color }}>
-            {member.nodeId}
-          </span>
-          {/* Indicador ACTIVE */}
-          <span className="flex items-center gap-1.5 text-[10px] text-white/40">
-            <motion.span
-              className="w-1.5 h-1.5 rounded-full"
-              style={{ background: member.color }}
-              animate={{ opacity: [1, 0.3, 1] }}
-              transition={{ duration: 1.8, repeat: Infinity }}
-            />
-            ONLINE
-          </span>
-        </div>
-
         {/* Avatar + anillo */}
-        <div className="flex justify-center mb-5">
+        <div className="flex justify-center mb-5 mt-3">
           <div className="relative">
             <Avatar member={member} size={96} />
             <PulseRing color={member.color} glow={member.glow} active={hovered} />
@@ -298,19 +276,6 @@ export default function TeamSection() {
             ))}
           </div>
         </div>
-
-        {/* Nota de fotos */}
-        <motion.p
-          initial={{ opacity: 0 }} animate={visible ? { opacity: 1 } : {}}
-          transition={{ duration: 0.6, delay: 1 }}
-          className="text-center text-white/20 text-xs mt-10"
-        >
-          ✦ Coloca las fotos en{" "}
-          <code className="text-[#8e86ff]/60 bg-white/5 px-1.5 py-0.5 rounded text-[10px]">
-            /public/team/daniel.jpg
-          </code>{" "}
-          et al. para reemplazar los avatares.
-        </motion.p>
       </div>
     </section>
   );

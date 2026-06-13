@@ -38,21 +38,27 @@ export default function HeroSection() {
         style={{ background: "radial-gradient(ellipse 60% 50% at 50% 50%, rgba(107,78,255,0.12), transparent 70%)" }}
       />
 
+      {/* ── Scrim de legibilidad: oscurece el centro para que el texto no compita con la red 3D ── */}
+      <div
+        className="absolute inset-0 z-[2] pointer-events-none"
+        style={{ background: "radial-gradient(ellipse 55% 48% at 50% 46%, rgba(5,4,26,0.78) 0%, rgba(5,4,26,0.45) 45%, transparent 75%)" }}
+      />
+
       {/* ── Contenido ── */}
       <div className="relative z-10 text-center px-4 max-w-4xl mx-auto">
 
         {/* Badge etimología */}
         <motion.div {...fadeUp(0.1)} className="flex justify-center mb-6">
-          <span className="inline-flex items-center gap-3 px-5 py-2 rounded-full text-sm font-semibold
-            bg-white/[0.07] border border-white/[0.15] backdrop-blur-md">
+          <span className="inline-flex items-center gap-2 sm:gap-3 px-4 sm:px-5 py-2 rounded-full text-sm font-semibold
+            bg-white/[0.07] border border-white/[0.15] backdrop-blur-md max-w-full">
             <span className="flex items-center gap-1.5">
               <span className="font-black text-[#8e86ff] tracking-widest text-base">NEU</span>
-              <span className="text-white/55 text-xs">neural · inteligencia</span>
+              <span className="text-white/55 text-xs hidden sm:inline">neural · inteligencia</span>
             </span>
             <span className="text-white/25 text-xs">✦</span>
             <span className="flex items-center gap-1.5">
               <span className="font-black text-[#FFB347] tracking-widest text-base">WASI</span>
-              <span className="text-white/55 text-xs">hogar en quechua</span>
+              <span className="text-white/55 text-xs hidden sm:inline">hogar en quechua</span>
             </span>
           </span>
         </motion.div>
@@ -60,7 +66,7 @@ export default function HeroSection() {
         {/* Headline */}
         <motion.h1
           {...fadeUp(0.22)}
-          className="text-5xl sm:text-6xl md:text-7xl font-black leading-[1.05] tracking-tight"
+          className="text-4xl sm:text-6xl md:text-7xl font-black leading-[1.05] tracking-tight"
         >
           <span className="block text-white mb-1">Tu</span>
           <span className="block bg-gradient-to-r from-[#a89fff] via-[#6B4EFF] to-[#00CFFF]
@@ -77,11 +83,10 @@ export default function HeroSection() {
         {/* Subtítulo */}
         <motion.p
           {...fadeUp(0.36)}
-          className="mt-6 text-lg sm:text-xl text-white/70 max-w-2xl mx-auto leading-relaxed"
+          className="mt-6 text-lg sm:text-xl text-white/80 max-w-2xl mx-auto leading-relaxed"
         >
-          Donde las <strong className="text-white/90">redes neuronales</strong> y la{" "}
-          <strong className="text-white/90">calidez del hogar</strong> se unen para resolver
-          los problemas reales de hoy: software, datos/IA e IoT.
+          Ayudamos a empresas a <strong className="text-white">tomar mejores decisiones con sus propios datos</strong>.
+          Construimos software, IA e IoT a la medida, con resultados medibles.
         </motion.p>
 
         {/* Chips */}
