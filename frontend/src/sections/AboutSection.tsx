@@ -5,7 +5,7 @@ const VALUES = [
   { icon: "💡", title: "Innovación aplicada", desc: "Tecnologías emergentes con métricas claras." },
   { icon: "🤝", title: "Transparencia total", desc: "Comunicación directa y trazabilidad en cada entrega." },
   { icon: "🏠", title: "Hogar de trabajo", desc: "Un espacio donde los problemas encuentran soluciones con calidez." },
-  { icon: "📊", title: "Datos como citizens", desc: "Gobierno, calidad y observabilidad desde el diseño." },
+  { icon: "📊", title: "Datos de primera clase", desc: "Gobierno, calidad y observabilidad desde el diseño." },
 ];
 
 export default function AboutSection() {

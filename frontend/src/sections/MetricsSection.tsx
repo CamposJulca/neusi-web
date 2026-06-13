@@ -10,7 +10,9 @@ const METRICS = [
 ];
 
 function Counter({ target, suffix, color, active }: { target: string; suffix: string; color: string; active: boolean }) {
-  const [display, setDisplay] = useState("0");
+  // Inicia en el valor final: si el observer no dispara (capturas, JS lento,
+  // prefers-reduced-motion) nunca se queda mostrando 0.
+  const [display, setDisplay] = useState(target);
   const num = parseFloat(target);
   const isNum = !isNaN(num);
 

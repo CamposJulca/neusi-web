@@ -6,26 +6,35 @@ const CASES = [
     color: "#6B4EFF",
     tag: "Sector Público",
     title: "Plataforma de Contratación",
-    desc: "Flujos CPS por ciclos, documentos en GridFS y auditoría completa. Reducción de reprocesos y SLAs ≥ 90%.",
-    highlights: ["Trazabilidad por proceso y notificaciones", "Evaluaciones, asignaciones y reportes", "Automatización de documentos SIPSE"],
+    problem: "Procesos de contratación con reprocesos, documentos dispersos y poca trazabilidad.",
+    solution: "Flujos CPS por ciclos, documentos en GridFS, auditoría completa y automatización SIPSE.",
+    result: "SLAs ≥ 90% y reducción de reprocesos con trazabilidad total por proceso.",
     metric: "SLA 90%+",
   },
   {
     color: "#FFB347",
     tag: "Finanzas",
     title: "FinanzApp",
-    desc: "KPIs financieros, ETL y tableros ejecutivos con exportables a Excel listos para junta directiva.",
-    highlights: ["Proyecciones y alertas", "Multiempresa y centros de costo", "Seguridad y auditoría"],
+    problem: "Cierres financieros manuales y reportes lentos para la junta directiva.",
+    solution: "KPIs financieros, ETL y tableros ejecutivos con exportables a Excel listos para presentar.",
+    result: "Información consolidada multiempresa en tiempo real y decisiones más ágiles.",
     metric: "ETL en tiempo real",
   },
   {
     color: "#00CFFF",
     tag: "Smart City",
     title: "IoT Urbano",
-    desc: "Monitoreo de activos con edge computing y acciones automáticas: mantenimiento predictivo.",
-    highlights: ["Telemetría en tiempo real", "Reglas y alertas automáticas", "Reportes de cumplimiento"],
+    problem: "Activos urbanos sin monitoreo, con fallas detectadas tarde y mantenimientos reactivos.",
+    solution: "Monitoreo con edge computing, reglas y alertas automáticas y mantenimiento predictivo.",
+    result: "Menos fallas no planificadas y reportes de cumplimiento automáticos.",
     metric: "Edge + MQTT",
   },
+];
+
+const STEPS = [
+  { key: "problem"  as const, label: "Problema",  icon: "✕" },
+  { key: "solution" as const, label: "Solución",  icon: "→" },
+  { key: "result"   as const, label: "Resultado", icon: "✓" },
 ];
 
 export default function CasesSection() {
@@ -67,17 +76,25 @@ export default function CasesSection() {
                 {c.tag}
               </span>
 
-              <h3 className="text-lg font-black text-[#151431] mb-2">{c.title}</h3>
-              <p className="text-sm text-[#151431]/60 leading-relaxed mb-4">{c.desc}</p>
+              <h3 className="text-lg font-black text-[#151431] mb-4">{c.title}</h3>
 
-              <ul className="space-y-1.5 mb-5">
-                {c.highlights.map((h) => (
-                  <li key={h} className="flex items-start gap-2 text-sm text-[#151431]/70">
-                    <span className="mt-0.5 text-xs" style={{ color: c.color }}>✓</span>
-                    {h}
-                  </li>
+              {/* Estructura Problema → Solución → Resultado */}
+              <div className="space-y-3 mb-5">
+                {STEPS.map((s) => (
+                  <div key={s.key} className="flex items-start gap-2.5">
+                    <span
+                      className="shrink-0 w-5 h-5 rounded-full flex items-center justify-center text-[11px] font-bold mt-0.5"
+                      style={{ background: `${c.color}18`, color: c.color }}
+                    >
+                      {s.icon}
+                    </span>
+                    <div>
+                      <p className="text-[11px] font-bold uppercase tracking-wide" style={{ color: c.color }}>{s.label}</p>
+                      <p className="text-sm text-[#151431]/70 leading-snug">{c[s.key]}</p>
+                    </div>
+                  </div>
                 ))}
-              </ul>
+              </div>
 
               {/* Metric badge */}
               <div className="flex items-center gap-2 pt-4 border-t border-[#e7e4ff]">

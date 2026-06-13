@@ -7,6 +7,7 @@ const SERVICES = [
     color: "#6B4EFF",
     title: "Desarrollo de Software",
     desc: "Web, móvil y APIs para procesos críticos. Arquitectura modular, seguridad y CI/CD.",
+    outcome: "Lanza productos digitales más rápido y reduce errores en producción.",
     tags: ["Django", "React", "FastAPI", "PostgreSQL"],
   },
   {
@@ -14,6 +15,7 @@ const SERVICES = [
     color: "#FFB347",
     title: "Datos e IA",
     desc: "Del dato a la decisión: pipelines, dashboards y modelos predictivos con valor medible.",
+    outcome: "Toma decisiones con datos confiables y anticipa resultados.",
     tags: ["ETL", "NLP", "Predicción", "BI"],
   },
   {
@@ -21,6 +23,7 @@ const SERVICES = [
     color: "#00CFFF",
     title: "IoT y Automatización",
     desc: "Sensores, edge computing y reglas de negocio para operación segura y trazable.",
+    outcome: "Reduce costos operativos y reacciona en tiempo real ante incidentes.",
     tags: ["MQTT", "ThingsBoard", "Edge", "Alertas"],
   },
   {
@@ -28,6 +31,7 @@ const SERVICES = [
     color: "#8e86ff",
     title: "DevOps & Infra",
     desc: "Despliegues reproducibles, observabilidad y costos optimizados.",
+    outcome: "Más disponibilidad del servicio y menor gasto en infraestructura.",
     tags: ["Docker", "K8s", "IaC", "CI/CD"],
   },
   {
@@ -35,6 +39,7 @@ const SERVICES = [
     color: "#FF8C42",
     title: "Consultoría & Arquitectura",
     desc: "Diagnóstico técnico y roadmap de modernización con foco en interoperabilidad.",
+    outcome: "Moderniza tu tecnología con un plan claro y menos riesgo.",
     tags: ["ADR", "DDD", "Seguridad", "Gobierno"],
   },
   {
@@ -42,6 +47,7 @@ const SERVICES = [
     color: "#6B4EFF",
     title: "I+D+i",
     desc: "Prototipos y pilotos con métricas claras: IA generativa, RPA y tecnologías emergentes.",
+    outcome: "Valida nuevas ideas con riesgo controlado antes de invertir a escala.",
     tags: ["POC", "Gen-AI", "RPA", "Spin-off"],
   },
 ];
@@ -87,7 +93,16 @@ export default function ServicesSection() {
 
               {/* Content */}
               <h3 className="text-base font-bold text-[#151431] mb-2">{s.title}</h3>
-              <p className="text-sm text-[#151431]/60 leading-relaxed mb-4">{s.desc}</p>
+              <p className="text-sm text-[#151431]/60 leading-relaxed mb-3">{s.desc}</p>
+
+              {/* Resultado de negocio */}
+              <div
+                className="flex items-start gap-2 mb-4 px-3 py-2 rounded-lg"
+                style={{ background: `${s.color}0d` }}
+              >
+                <span className="text-xs mt-0.5" style={{ color: s.color }}>↗</span>
+                <p className="text-xs font-semibold text-[#151431]/75 leading-snug">{s.outcome}</p>
+              </div>
 
               {/* Tags */}
               <div className="flex flex-wrap gap-1.5">
